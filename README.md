@@ -182,5 +182,7 @@ Most of the game will be seen through panels and windows to simulate the actions
 
 
 # Development Timeline
+
 https://app.clickup.com/8575695/v/dc/85ppf-720
+
 https://app.clickup.com/8575695/v/b/4-90090549586-2
