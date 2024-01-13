@@ -2,7 +2,7 @@
 
 # DESIGN DOCUMENT
 
-By DaemonsRuin, for the [Pirate Software](https://www.twitch.tv/piratesoftware) [Game Jam](https://itch.io/jam/pirate) 14
+By DaemonsRuin, for the [Godot Wild Game Jam #65](https://itch.io/jam/godot-wild-jam-65)
 
 * * *
 
