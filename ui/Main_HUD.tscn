@@ -1,0 +1,244 @@
+[gd_scene load_steps=16 format=3 uid="uid://b7cm47sffldf2"]
+
+[ext_resource type="Texture2D" uid="uid://73y38rkqg37k" path="res://assets/UI_Lower.png" id="1_sugvj"]
+[ext_resource type="Texture2D" uid="uid://bbb6cj3wn7chm" path="res://assets/essenceBlue.png" id="2_glaes"]
+[ext_resource type="Texture2D" uid="uid://cuyhrbu0yptn5" path="res://assets/panel2.png" id="2_k740w"]
+[ext_resource type="Texture2D" uid="uid://w1u62ib488q8" path="res://assets/essenceRed.png" id="3_knsfq"]
+[ext_resource type="FontFile" uid="uid://dgmam42gwcx1v" path="res://ui/fonts/HTOWERT.TTF" id="3_pkrtq"]
+[ext_resource type="Texture2D" uid="uid://n6hrdcsbkxel" path="res://assets/essenceOrange.png" id="4_r4281"]
+[ext_resource type="Script" path="res://src/EssenceBars.gd" id="5_kyd5t"]
+[ext_resource type="Texture2D" uid="uid://dyeht2qjx48ln" path="res://assets/essenceWhite.png" id="5_ty8aa"]
+[ext_resource type="Texture2D" uid="uid://kvjbcf0fed7" path="res://assets/button1.png" id="6_ct2w6"]
+[ext_resource type="Texture2D" uid="uid://gx2m7hr3aqre" path="res://assets/seeds/seedBasic.png" id="9_u01rf"]
+[ext_resource type="Texture2D" uid="uid://dpq601mbaksag" path="res://assets/book.png" id="10_hmyxk"]
+[ext_resource type="Texture2D" uid="uid://pjnri1v11tx8" path="res://assets/settings.png" id="11_i2y36"]
+[ext_resource type="Script" path="res://src/seedsBar.gd" id="11_seg54"]
+[ext_resource type="Script" path="res://src/seedsBox.gd" id="12_c1q8k"]
+[ext_resource type="PackedScene" uid="uid://dpearqneqfuya" path="res://ui/textFeed.tscn" id="12_yhccp"]
+
+[node name="HUD" type="CanvasLayer"]
+
+[node name="settingButton" type="TextureButton" parent="."]
+texture_filter = 1
+offset_left = 35.0
+offset_top = 35.0
+offset_right = 51.0
+offset_bottom = 51.0
+scale = Vector2(3, 3)
+texture_normal = ExtResource("11_i2y36")
+
+[node name="dockControl" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="dockMarginContainer" type="MarginContainer" parent="dockControl"]
+layout_mode = 0
+offset_left = 1.0
+offset_top = 983.0
+offset_right = 1919.0
+offset_bottom = 1079.0
+
+[node name="Dock" type="NinePatchRect" parent="dockControl/dockMarginContainer"]
+texture_filter = 1
+layout_mode = 2
+texture = ExtResource("1_sugvj")
+region_rect = Rect2(0, 0, 96, 96)
+patch_margin_left = 48
+patch_margin_top = 32
+patch_margin_right = 48
+patch_margin_bottom = 64
+
+[node name="textMarginContainer" type="MarginContainer" parent="dockControl" groups=["textFeedDock"]]
+visible = false
+layout_mode = 0
+offset_left = 48.0
+offset_top = 994.0
+offset_right = 634.0
+offset_bottom = 1068.0
+
+[node name="textFeed" type="NinePatchRect" parent="dockControl/textMarginContainer"]
+texture_filter = 1
+layout_mode = 2
+texture = ExtResource("2_k740w")
+patch_margin_left = 16
+patch_margin_top = 16
+patch_margin_right = 16
+patch_margin_bottom = 16
+
+[node name="Label" type="Label" parent="dockControl/textMarginContainer/textFeed"]
+layout_mode = 0
+offset_left = 10.0
+offset_top = 5.0
+offset_right = 580.0
+offset_bottom = 70.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_pkrtq")
+theme_override_font_sizes/font_size = 25
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="EssenceBars" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 1652.0
+offset_top = 990.0
+offset_right = 1733.0
+offset_bottom = 1030.0
+scale = Vector2(3, 3)
+script = ExtResource("5_kyd5t")
+
+[node name="colorGridContainer" type="GridContainer" parent="EssenceBars"]
+layout_mode = 1
+offset_right = 76.0
+offset_bottom = 50.0
+columns = 4
+
+[node name="essenceBlue" type="TextureRect" parent="EssenceBars/colorGridContainer"]
+texture_filter = 1
+layout_mode = 2
+texture = ExtResource("2_glaes")
+
+[node name="essenceRed" type="TextureRect" parent="EssenceBars/colorGridContainer"]
+texture_filter = 1
+layout_mode = 2
+texture = ExtResource("3_knsfq")
+
+[node name="essenceOrange" type="TextureRect" parent="EssenceBars/colorGridContainer"]
+texture_filter = 1
+layout_mode = 2
+texture = ExtResource("4_r4281")
+
+[node name="essenceWhite" type="TextureRect" parent="EssenceBars/colorGridContainer"]
+texture_filter = 1
+layout_mode = 2
+texture = ExtResource("5_ty8aa")
+
+[node name="countGridContainer" type="GridContainer" parent="EssenceBars"]
+layout_mode = 0
+offset_left = -0.5
+offset_top = 17.0
+offset_right = 139.5
+offset_bottom = 41.0
+scale = Vector2(0.56, 0.56)
+columns = 4
+
+[node name="textBox1" type="TextureRect" parent="EssenceBars/countGridContainer"]
+texture_filter = 1
+layout_mode = 2
+texture = ExtResource("6_ct2w6")
+stretch_mode = 2
+
+[node name="countBlue" type="Label" parent="EssenceBars/countGridContainer/textBox1"]
+layout_mode = 0
+offset_top = -1.0
+offset_right = 32.0
+offset_bottom = 16.0
+theme_override_font_sizes/font_size = 12
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="textBox2" type="TextureRect" parent="EssenceBars/countGridContainer"]
+texture_filter = 1
+layout_mode = 2
+texture = ExtResource("6_ct2w6")
+stretch_mode = 2
+
+[node name="countRed" type="Label" parent="EssenceBars/countGridContainer/textBox2"]
+layout_mode = 0
+offset_top = -1.0
+offset_right = 32.0
+offset_bottom = 16.0
+theme_override_font_sizes/font_size = 12
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="textBox3" type="TextureRect" parent="EssenceBars/countGridContainer"]
+texture_filter = 1
+layout_mode = 2
+texture = ExtResource("6_ct2w6")
+stretch_mode = 2
+
+[node name="countOrange" type="Label" parent="EssenceBars/countGridContainer/textBox3"]
+layout_mode = 0
+offset_top = -1.0
+offset_right = 32.0
+offset_bottom = 16.0
+theme_override_font_sizes/font_size = 12
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="textBox4" type="TextureRect" parent="EssenceBars/countGridContainer"]
+texture_filter = 1
+layout_mode = 2
+texture = ExtResource("6_ct2w6")
+stretch_mode = 2
+
+[node name="countWhite" type="Label" parent="EssenceBars/countGridContainer/textBox4"]
+layout_mode = 0
+offset_top = -1.0
+offset_right = 32.0
+offset_bottom = 16.0
+theme_override_font_sizes/font_size = 12
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="seedsBar" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 1501.0
+offset_top = 997.0
+offset_right = 1541.0
+offset_bottom = 1037.0
+script = ExtResource("11_seg54")
+
+[node name="seedsBox" type="TextureRect" parent="seedsBar"]
+texture_filter = 1
+layout_mode = 0
+offset_right = 94.0
+offset_bottom = 68.0
+texture = ExtResource("6_ct2w6")
+expand_mode = 5
+script = ExtResource("12_c1q8k")
+
+[node name="Label" type="Label" parent="seedsBar/seedsBox" groups=["seedsBar"]]
+layout_mode = 0
+offset_left = 43.0
+offset_top = 17.0
+offset_right = 83.0
+offset_bottom = 51.0
+theme_override_font_sizes/font_size = 24
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="seedIcon" type="TextureRect" parent="seedsBar"]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -37.0
+offset_top = -52.0
+offset_right = 43.0
+offset_bottom = 108.0
+grow_horizontal = 0
+grow_vertical = 0
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("9_u01rf")
+
+[node name="bookButton" type="TextureButton" parent="."]
+offset_left = 920.0
+offset_top = 898.0
+offset_right = 1080.0
+offset_bottom = 1058.0
+texture_normal = ExtResource("10_hmyxk")
+
+[node name="TextFeed" parent="." groups=["textFeed"] instance=ExtResource("12_yhccp")]

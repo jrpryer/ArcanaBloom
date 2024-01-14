@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://b2fnlhufjvvfj"
+path="res://.godot/imported/Chest Close 3.wav-7b3d5e16672cb76850c033603908f452.sample"
+
+[deps]
+
+source_file="res://assets/sounds/Chest Close 3.wav"
+dest_files=["res://.godot/imported/Chest Close 3.wav-7b3d5e16672cb76850c033603908f452.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=3 uid="uid://djxxnw0bbx0yb"]
+
+[ext_resource type="Texture2D" uid="uid://b68hey45i6t4g" path="res://assets/stoneTile4.png" id="1_11wpb"]
+
+[node name="Node2D" type="StaticBody2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+texture = ExtResource("1_11wpb")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+position = Vector2(1, -10)
+polygon = PackedVector2Array(-5, 19, 15, 9, 16, 10, -4, 20)

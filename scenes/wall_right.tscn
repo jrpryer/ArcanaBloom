@@ -1,0 +1,16 @@
+[gd_scene load_steps=2 format=3 uid="uid://dr5e408l6d2dy"]
+
+[ext_resource type="Texture2D" uid="uid://bvcehct657n8v" path="res://assets/stoneWallRight.png" id="1_cnutd"]
+
+[node name="WallRight" type="StaticBody2D"]
+z_index = 2
+y_sort_enabled = true
+
+[node name="StoneWallRight" type="Sprite2D" parent="."]
+texture_filter = 1
+texture = ExtResource("1_cnutd")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+y_sort_enabled = true
+build_mode = 1
+polygon = PackedVector2Array(16, 35, 16, 36, 14, 36, -18, 20, -16, 19)

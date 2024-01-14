@@ -1,0 +1,26 @@
+[gd_scene load_steps=5 format=3 uid="uid://cc7e6qukt0kay"]
+
+[ext_resource type="Script" path="res://src/plot.gd" id="1_kvbt2"]
+[ext_resource type="Texture2D" uid="uid://c2josic54aao" path="res://assets/plots/plot1_dirt.png" id="1_ymy4j"]
+[ext_resource type="PackedScene" uid="uid://dg18h4f07dtwj" path="res://interaction/interact area/interaction_area.tscn" id="2_us8rh"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xesnw"]
+size = Vector2(96, 96)
+
+[node name="Plot" type="StaticBody2D" groups=["plot"]]
+script = ExtResource("1_kvbt2")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+scale = Vector2(0.46875, 0.46875)
+polygon = PackedVector2Array(0, 68.2667, 68.2667, 34.1333, 68.2667, -34.1333, 0, -68.2667, -68.2667, -34.1333, -68.2667, 34.1333)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+texture = ExtResource("1_ymy4j")
+
+[node name="InteractionArea" parent="." instance=ExtResource("2_us8rh")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionArea"]
+shape = SubResource("RectangleShape2D_xesnw")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
