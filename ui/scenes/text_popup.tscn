@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://src/text_popup.gd" id="1_vrqbr"]
 [ext_resource type="FontFile" uid="uid://dgmam42gwcx1v" path="res://ui/fonts/HTOWERT.TTF" id="2_gwkw4"]
-[ext_resource type="Texture2D" uid="uid://i7vnshh72c7r" path="res://assets/panel1.png" id="2_mpt8q"]
+[ext_resource type="Texture2D" uid="uid://i7vnshh72c7r" path="res://ui/textures/panel1.png" id="2_mpt8q"]
 
 [node name="TextPopup" type="MarginContainer"]
 y_sort_enabled = true

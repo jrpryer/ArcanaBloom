@@ -1,41 +1,51 @@
 extends StaticBody2D
+class_name Plantable
 
-@onready var seedsCount = int(get_tree().get_first_node_in_group("seedsBar").text)
+@onready var water_ui = get_tree().get_first_node_in_group("waterUI")
+@onready var seedCount = get_tree().get_first_node_in_group("seedsBar").seedCount
 @onready var interaction_area: InteractionArea = $InteractionArea
-#@onready var sprite = $Sprite2D
+@onready var sprite = $plant_stalk
 @onready var audio_player = $AudioStreamPlayer
 
 @onready var speech_sound = preload("res://assets/sounds/UI_Menu_04.wav")
 @onready var progression_sound = preload("res://assets/sounds/AC_Correct_Answer_01v2.wav")
 @onready var plant_sound = preload("res://assets/sounds/Chest Close 3.wav")
 
-var can_interact = false
+@onready var plantedSeed: String = "empty"
+
+var seed_interact = false
+var plot_interact = false
 #var plotSeed: Array[InventoryItem_seed]
-var plantedSeed: String = "empty"
 var seedGrowthState: int
 
 
 const lines: Array[String] = [
-	"Grow little one!"
+	"Now grow!"
 ]
 
 func _ready():
 	interaction_area.interact = Callable(self, "_on_interact")
+	#self.check_plant = Callable(self, "_on_check_plant")
 	
 func _process(_delta):
-	if SeedsBar.seedBank.size() > 0:
-		can_interact = true
+	if SeedsBar.seedBank.size() > 0 && plantedSeed == "empty":
+		seed_interact = true
+		$InteractionArea.can_interact = true
+	elif plantedSeed != "empty":
+		seed_interact = false
+		plot_interact = true
+		$InteractionArea.action_name = "Inspect"
 		$InteractionArea.can_interact = true
 	else:
-		can_interact = false
+		seed_interact = false
 		$InteractionArea.can_interact = false
 		InteractionManager.unregister_area($InteractionArea)
 	
 func _on_interact():
-	if plantedSeed == "empty" && can_interact:
-		plantedSeed = SeedsBar.seedBank[0]
+	if plantedSeed == "empty" && seed_interact:
+		plantedSeed = SeedsBar.seedBank.front()
 		# Remove Seed from hotbar.
-		SeedsBar.unregister_seed(plantedSeed[0])
+		SeedsBar.unregister_seed(plantedSeed)
 		#subtract_seed.emit()
 		
 		# Play plant_sound
@@ -50,8 +60,23 @@ func _on_interact():
 		DialogManager.start_dialog(lines, speech_sound)
 		#await DialogManager.dialog_finished
 
-	if plantedSeed != "empty" && can_interact:
-		if plantedSeed[0] == "blue1":
-			$Sprite2D.texture = load("res://assets/plots/plotBlue_stage1.png")
+	if plantedSeed != "empty" && seed_interact:
+		if plantedSeed == "blue1":
+			sprite.texture = load("res://assets/plots/plotBlue_stage1.png")
 			seedGrowthState = 1
-			print(plantedSeed[0]) #DEBUG
+		elif plantedSeed == "red1":
+			sprite.texture = load("res://assets/plots/plotRed_stage1.png")
+			seedGrowthState = 1
+		elif plantedSeed == "orange1":
+			sprite.texture = load("res://assets/plots/plotOrange_stage1.png")
+			seedGrowthState = 1
+		elif plantedSeed == "white1":
+			sprite.texture = load("res://assets/plots/plotWhite_stage1.png")
+			seedGrowthState = 1
+	
+	if plot_interact == true && seedGrowthState == 1:
+		water_ui.load_plant(plantedSeed, seedGrowthState)
+		UiManager.toggle_ui(water_ui, true, "water_ui")
+
+func _on_check_plant():
+	return plantedSeed

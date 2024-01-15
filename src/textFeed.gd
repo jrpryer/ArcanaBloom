@@ -3,6 +3,7 @@ extends MarginContainer
 @onready var label = $MarginContainer/Label
 @onready var timer = $LetterDisplayTimer
 @onready var audio_player = $AudioStreamPlayer
+@onready var next_indicator = $NinePatchRect/Control/NextIndicator
 
 
 const MAX_WIDTH = 256
@@ -45,6 +46,7 @@ func _display_letter():
 	letter_index += 1
 	if letter_index >= text.length():
 		finished_displaying.emit()
+		next_indicator.visible = true
 		return
 		
 	match text[letter_index]:

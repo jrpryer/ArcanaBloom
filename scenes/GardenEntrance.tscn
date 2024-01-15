@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://dxrt8rb3f1f0"]
+[gd_scene load_steps=28 format=3 uid="uid://dxrt8rb3f1f0"]
 
 [ext_resource type="Texture2D" uid="uid://cne8vgkm5jk4k" path="res://assets/stoneTile3.png" id="2_k7xcm"]
 [ext_resource type="Texture2D" uid="uid://b68hey45i6t4g" path="res://assets/stoneTile4.png" id="3_5cmfy"]
@@ -9,8 +9,15 @@
 [ext_resource type="PackedScene" uid="uid://djxxnw0bbx0yb" path="res://scenes/tileEdge_right.tscn" id="4_pxsg5"]
 [ext_resource type="PackedScene" uid="uid://dtn5cmj8a0huu" path="res://scenes/tileEdge_center.tscn" id="5_35xn3"]
 [ext_resource type="PackedScene" uid="uid://dkrckme5qeqv" path="res://scenes/seed.tscn" id="9_flyvp"]
-[ext_resource type="PackedScene" uid="uid://b7cm47sffldf2" path="res://ui/Main_HUD.tscn" id="10_lfq4b"]
+[ext_resource type="PackedScene" uid="uid://c1shupr7ur2op" path="res://ui/scenes/book.tscn" id="10_5ypdq"]
+[ext_resource type="PackedScene" uid="uid://b7cm47sffldf2" path="res://ui/scenes/Main_HUD.tscn" id="10_lfq4b"]
 [ext_resource type="PackedScene" uid="uid://cc7e6qukt0kay" path="res://scenes/woodenPlot.tscn" id="11_m3oqb"]
+[ext_resource type="PackedScene" uid="uid://ca372k80sbl1d" path="res://ui/scenes/water_plant.tscn" id="11_oiv2c"]
+[ext_resource type="PackedScene" uid="uid://bygu2lprnugxr" path="res://scenes/door1_left.tscn" id="13_apkfn"]
+[ext_resource type="SpriteFrames" uid="uid://dqcg5ims8axl" path="res://assets/seeds/seed_blue_frames.tres" id="13_lxnfm"]
+[ext_resource type="SpriteFrames" uid="uid://bn0blb3t6gc0k" path="res://assets/seeds/seed_red_frames.tres" id="14_koudh"]
+[ext_resource type="SpriteFrames" uid="uid://dlfo4syv65u3l" path="res://assets/seeds/seed_orange_frames.tres" id="15_sk7c8"]
+[ext_resource type="SpriteFrames" uid="uid://w0hpc0k5r7m7" path="res://assets/seeds/seed_white_frames.tres" id="16_hg5r0"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_lxtdi"]
 texture = ExtResource("3_5cmfy")
@@ -80,13 +87,63 @@ layer_0/z_index = 1
 layer_0/tile_data = PackedInt32Array(65545, 0, 65536, 196617, 0, 65536, -65527, 0, 65536, -196599, 0, 65536, -327671, 0, 65536, -458743, 0, 65536, -589815, 0, 65536, -720887, 0, 65536, -786422, 1, 65536, -786420, 1, 65536, -786418, 1, 65536, -786416, 1, 65536, -851951, 0, 65536, -983023, 0, 65536, -1114095, 0, 65536, -1245167, 0, 65536, -1310702, 1, 65536, -1310700, 1, 65536, -1310698, 1, 65536, -1310696, 1, 65536, -1310694, 1, 65536, -1310692, 1, 65536, -1310690, 1, 65536, -1310688, 1, 65536, -1310686, 1, 65536, -1310684, 1, 65536, -1310682, 1, 65536, -1310680, 1, 65536, -1310678, 1, 65536, -1310676, 1, 65536, -1310674, 1, 65536, -1310672, 1, 65536, -1310670, 1, 65536, -1310668, 1, 65536, -1310666, 1, 65536, -1310664, 1, 65536, 327689, 0, 65536, 458761, 0, 65536, 589833, 0, 65536, 655370, 1, 65536, 655372, 1, 65536, 655374, 1, 65536, 655376, 1, 65536, 720913, 0, 65536, 851985, 0, 65536, 983057, 0, 65536, 1114129, 0, 65536, 1245201, 0, 65536, 1376273, 0, 65536, 1507345, 0, 65536)
 
 [node name="Player" parent="." instance=ExtResource("3_o86tp")]
+z_index = 10
+y_sort_enabled = true
 
 [node name="HUD" parent="." instance=ExtResource("10_lfq4b")]
 
-[node name="Seed" parent="." instance=ExtResource("9_flyvp")]
-position = Vector2(965, 454)
-seedName = null
+[node name="Book" parent="HUD" groups=["bookUI"] instance=ExtResource("10_5ypdq")]
+visible = false
+
+[node name="water_ui" parent="HUD" instance=ExtResource("11_oiv2c")]
+visible = false
 
 [node name="woodenPlot" parent="." instance=ExtResource("11_m3oqb")]
-z_index = 3
 position = Vector2(1160, 343)
+
+[node name="woodenPlot2" parent="." instance=ExtResource("11_m3oqb")]
+position = Vector2(1257, 395)
+
+[node name="woodenPlot3" parent="." instance=ExtResource("11_m3oqb")]
+position = Vector2(683, 758)
+
+[node name="woodenPlot4" parent="." instance=ExtResource("11_m3oqb")]
+position = Vector2(555, 697)
+
+[node name="woodenPlot5" parent="." instance=ExtResource("11_m3oqb")]
+position = Vector2(1196, 361)
+
+[node name="woodenPlot6" parent="." instance=ExtResource("11_m3oqb")]
+position = Vector2(1293, 413)
+
+[node name="woodenPlot7" parent="." instance=ExtResource("11_m3oqb")]
+position = Vector2(718, 776)
+
+[node name="woodenPlot8" parent="." instance=ExtResource("11_m3oqb")]
+position = Vector2(590, 715)
+
+[node name="blue1" parent="." instance=ExtResource("9_flyvp")]
+position = Vector2(1049, 417)
+seedName = "blue1"
+seedTexture = ExtResource("13_lxnfm")
+
+[node name="red1" parent="." instance=ExtResource("9_flyvp")]
+position = Vector2(1172, 485)
+seedName = "red1"
+seedTexture = ExtResource("14_koudh")
+
+[node name="orange1" parent="." instance=ExtResource("9_flyvp")]
+position = Vector2(758, 704)
+seedName = "orange1"
+seedTexture = ExtResource("15_sk7c8")
+
+[node name="white1" parent="." instance=ExtResource("9_flyvp")]
+position = Vector2(633, 648)
+seedName = "white1"
+seedTexture = ExtResource("16_hg5r0")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." groups=["sfx"]]
+
+[node name="Door" parent="." instance=ExtResource("13_apkfn")]
+z_index = 3
+position = Vector2(588, 309)

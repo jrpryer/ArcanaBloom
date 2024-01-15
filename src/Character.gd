@@ -1,12 +1,14 @@
 extends CharacterBody2D
 
-const max_speed = 350
+const max_speed = 300
 const accel = 3000
-const friction = 2000
+const friction = 3200
 
 var input = Vector2.ZERO
 
 func _physics_process(delta):
+	if DialogManager.is_dialog_active || UiManager.menu_active:
+		return
 	player_movement(delta)
 
 func get_input():

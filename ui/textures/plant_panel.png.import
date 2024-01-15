@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://pjnri1v11tx8"
-path="res://.godot/imported/settings.png-8df8fb5847afa3e1d944f88c783757ac.ctex"
+uid="uid://bdmj2isotm1k3"
+path="res://.godot/imported/plant_panel.png-6f2106c3a9a8326e0384e38171cd7e31.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/settings.png"
-dest_files=["res://.godot/imported/settings.png-8df8fb5847afa3e1d944f88c783757ac.ctex"]
+source_file="res://ui/textures/plant_panel.png"
+dest_files=["res://.godot/imported/plant_panel.png-6f2106c3a9a8326e0384e38171cd7e31.ctex"]
 
 [params]
 

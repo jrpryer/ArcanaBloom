@@ -1,0 +1,136 @@
+[gd_scene load_steps=6 format=3 uid="uid://c1shupr7ur2op"]
+
+[ext_resource type="StyleBox" uid="uid://dnmicfmqn34qf" path="res://ui/panel3.tres" id="1_6vawp"]
+[ext_resource type="Script" path="res://src/book.gd" id="1_prf64"]
+[ext_resource type="Theme" uid="uid://dewhnganfla67" path="res://ui/rustic_theme.tres" id="2_3qubk"]
+[ext_resource type="StyleBox" uid="uid://dr1jhqgo7vrtr" path="res://ui/panel1.tres" id="3_0w2nl"]
+[ext_resource type="Texture2D" uid="uid://dgv2exfc8ucwh" path="res://ui/textures/Close.png" id="5_50nrt"]
+
+[node name="Book" type="CanvasLayer"]
+script = ExtResource("1_prf64")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -3555.0
+offset_top = -2102.0
+offset_right = 3535.0
+offset_bottom = 2114.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+color = Color(0.0196078, 0.00784314, 0, 0.611765)
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -822.0
+offset_top = -466.0
+offset_right = 822.0
+offset_bottom = 414.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="MarginContainer"]
+texture_filter = 1
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 2.0
+theme_override_styles/panel = ExtResource("1_6vawp")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/PanelContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="journalPanel" type="PanelContainer" parent="MarginContainer/PanelContainer/HBoxContainer"]
+texture_filter = 1
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("2_3qubk")
+theme_override_styles/panel = ExtResource("3_0w2nl")
+
+[node name="VBoxContainer1" type="VBoxContainer" parent="MarginContainer/PanelContainer/HBoxContainer/journalPanel"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/PanelContainer/HBoxContainer/journalPanel/VBoxContainer1"]
+texture_filter = 1
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+theme_type_variation = &"HeaderLabel"
+theme_override_font_sizes/font_size = 45
+text = "Lore Journal"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="discoveryList" type="VBoxContainer" parent="MarginContainer/PanelContainer/HBoxContainer/journalPanel/VBoxContainer1"]
+layout_mode = 2
+
+[node name="dicoveryLabel" type="Label" parent="MarginContainer/PanelContainer/HBoxContainer/journalPanel/VBoxContainer1/discoveryList"]
+texture_filter = 1
+layout_mode = 2
+theme_override_font_sizes/font_size = 25
+text = "
+- Discovery 1
+- Discovery 2"
+
+[node name="Spacer1" type="Control" parent="MarginContainer/PanelContainer/HBoxContainer/journalPanel/VBoxContainer1"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/PanelContainer/HBoxContainer/journalPanel/VBoxContainer1"]
+layout_mode = 2
+alignment = 1
+
+[node name="Button" type="Button" parent="MarginContainer/PanelContainer/HBoxContainer/journalPanel/VBoxContainer1/HBoxContainer"]
+texture_filter = 1
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 22
+text = "Tracking"
+
+[node name="bookPanel" type="PanelContainer" parent="MarginContainer/PanelContainer/HBoxContainer"]
+texture_filter = 1
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = ExtResource("3_0w2nl")
+
+[node name="Label" type="Label" parent="MarginContainer/PanelContainer/HBoxContainer/bookPanel"]
+texture_filter = 1
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+theme_type_variation = &"HeaderLabel"
+theme_override_font_sizes/font_size = 45
+text = "Book of Lost Formulas"
+horizontal_alignment = 2
+
+[node name="closeButton" type="TextureButton" parent="."]
+texture_filter = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 798.0
+offset_top = -486.0
+offset_right = 862.0
+offset_bottom = -422.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.7, 0.7)
+size_flags_horizontal = 8
+size_flags_vertical = 0
+size_flags_stretch_ratio = 3.0
+tooltip_text = "Close"
+texture_normal = ExtResource("5_50nrt")
+
+[connection signal="pressed" from="closeButton" to="." method="_on_close_button_pressed"]

@@ -1,7 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://cgr5fig78o16o"]
+[gd_scene load_steps=2 format=3 uid="uid://cgr5fig78o16o"]
 
 [ext_resource type="Script" path="res://src/InteractionManager.gd" id="1_k5ggf"]
-[ext_resource type="FontFile" uid="uid://dgmam42gwcx1v" path="res://ui/fonts/HTOWERT.TTF" id="2_qbdsl"]
 
 [node name="InteractionManager" type="Node2D"]
 script = ExtResource("1_k5ggf")
@@ -16,7 +15,7 @@ offset_left = -52.5
 offset_right = 52.5
 offset_bottom = 23.0
 grow_horizontal = 2
-theme_override_fonts/font = ExtResource("2_qbdsl")
+theme_type_variation = &"WorldText"
 text = "[Space] to interact"
 horizontal_alignment = 1
 vertical_alignment = 1

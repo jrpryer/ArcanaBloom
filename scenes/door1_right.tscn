@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://txsfhmyci18l"]
+
+[ext_resource type="Texture2D" uid="uid://bio88n73hxmxm" path="res://assets/door1_right.png" id="1_pp7sb"]
+[ext_resource type="PackedScene" uid="uid://dg18h4f07dtwj" path="res://interaction/interact area/interaction_area.tscn" id="2_pjmbs"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_q4n6n"]
+size = Vector2(80, 72)
+
+[node name="Door" type="StaticBody2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -12)
+texture = ExtResource("1_pp7sb")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+position = Vector2(0, -12)
+polygon = PackedVector2Array(32, 52, -32, 20, -32, 13, 32, 45)
+
+[node name="InteractionArea" parent="." instance=ExtResource("2_pjmbs")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionArea"]
+position = Vector2(-8, 20)
+shape = SubResource("RectangleShape2D_q4n6n")

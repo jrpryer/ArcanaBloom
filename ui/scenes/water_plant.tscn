@@ -1,0 +1,272 @@
+[gd_scene load_steps=10 format=3 uid="uid://ca372k80sbl1d"]
+
+[ext_resource type="Script" path="res://src/water_plant.gd" id="1_qnjcu"]
+[ext_resource type="StyleBox" uid="uid://dnmicfmqn34qf" path="res://ui/panel3.tres" id="2_8qt6k"]
+[ext_resource type="Theme" uid="uid://dewhnganfla67" path="res://ui/rustic_theme.tres" id="3_ckggw"]
+[ext_resource type="StyleBox" uid="uid://dr1jhqgo7vrtr" path="res://ui/panel1.tres" id="4_hspah"]
+[ext_resource type="Texture2D" uid="uid://dgv2exfc8ucwh" path="res://ui/textures/Close.png" id="5_2odoe"]
+[ext_resource type="Texture2D" uid="uid://cv4l35tbarbhx" path="res://assets/plots/plotRed_stage1.png" id="5_fvi7q"]
+[ext_resource type="Texture2D" uid="uid://ndiox0mpr348" path="res://ui/textures/big_button_pressed.png" id="5_ia2ij"]
+[ext_resource type="Texture2D" uid="uid://cp5vmnj644iok" path="res://assets/plots/grow_particles.png" id="6_kjoeb"]
+[ext_resource type="Texture2D" uid="uid://dsinj3rfwf34m" path="res://ui/textures/big_water.png" id="6_ubs8n"]
+
+[node name="water_ui" type="CanvasLayer" groups=["waterUI"]]
+script = ExtResource("1_qnjcu")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -3555.0
+offset_top = -2102.0
+offset_right = 3535.0
+offset_bottom = 2114.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+color = Color(0.0196078, 0.00784314, 0, 0.611765)
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -822.0
+offset_top = -466.0
+offset_right = 822.0
+offset_bottom = 414.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Old" type="PanelContainer" parent="MarginContainer"]
+visible = false
+texture_filter = 1
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 2.0
+theme_override_styles/panel = ExtResource("2_8qt6k")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/Old"]
+layout_mode = 2
+alignment = 1
+
+[node name="journalPanel" type="PanelContainer" parent="MarginContainer/Old/HBoxContainer"]
+texture_filter = 1
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("3_ckggw")
+theme_override_styles/panel = ExtResource("4_hspah")
+
+[node name="VBoxContainer1" type="VBoxContainer" parent="MarginContainer/Old/HBoxContainer/journalPanel"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/Old/HBoxContainer/journalPanel/VBoxContainer1"]
+texture_filter = 1
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+theme_type_variation = &"HeaderLabel"
+theme_override_font_sizes/font_size = 45
+text = "Lore Journal"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="discoveryList" type="VBoxContainer" parent="MarginContainer/Old/HBoxContainer/journalPanel/VBoxContainer1"]
+layout_mode = 2
+
+[node name="dicoveryLabel" type="Label" parent="MarginContainer/Old/HBoxContainer/journalPanel/VBoxContainer1/discoveryList"]
+texture_filter = 1
+layout_mode = 2
+theme_override_font_sizes/font_size = 25
+text = "
+- Discovery 1
+- Discovery 2"
+
+[node name="Spacer1" type="Control" parent="MarginContainer/Old/HBoxContainer/journalPanel/VBoxContainer1"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/Old/HBoxContainer/journalPanel/VBoxContainer1"]
+layout_mode = 2
+alignment = 1
+
+[node name="Button" type="Button" parent="MarginContainer/Old/HBoxContainer/journalPanel/VBoxContainer1/HBoxContainer"]
+texture_filter = 1
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 22
+text = "Tracking"
+
+[node name="bookPanel" type="PanelContainer" parent="MarginContainer/Old/HBoxContainer"]
+texture_filter = 1
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = ExtResource("4_hspah")
+
+[node name="Label" type="Label" parent="MarginContainer/Old/HBoxContainer/bookPanel"]
+texture_filter = 1
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+theme_type_variation = &"HeaderLabel"
+theme_override_font_sizes/font_size = 45
+text = "Book of Lost Formulas"
+horizontal_alignment = 2
+
+[node name="Panel" type="Panel" parent="MarginContainer"]
+texture_filter = 1
+layout_mode = 2
+theme = ExtResource("3_ckggw")
+
+[node name="plant_window" type="PanelContainer" parent="MarginContainer/Panel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -275.0
+offset_top = -94.0
+offset_right = 275.0
+offset_bottom = 352.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="plant" type="TextureRect" parent="MarginContainer/Panel/plant_window" groups=["plant"]]
+layout_mode = 2
+texture = ExtResource("5_fvi7q")
+stretch_mode = 5
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/Panel/plant_window"]
+layout_mode = 2
+
+[node name="particles" type="TextureRect" parent="MarginContainer/Panel/plant_window/VBoxContainer" groups=["particles"]]
+visible = false
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 2.0
+texture = ExtResource("6_kjoeb")
+expand_mode = 2
+stretch_mode = 5
+
+[node name="Control" type="Control" parent="MarginContainer/Panel/plant_window/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="BoxContainer" type="BoxContainer" parent="MarginContainer/Panel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -822.0
+offset_top = -440.0
+offset_right = 822.0
+offset_bottom = 440.0
+grow_horizontal = 2
+grow_vertical = 2
+vertical = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/Panel/BoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Spacer_top" type="Control" parent="MarginContainer/Panel/BoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/Panel/BoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Spacer_left" type="Control" parent="MarginContainer/Panel/BoxContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 3.0
+
+[node name="water_button" type="Button" parent="MarginContainer/Panel/BoxContainer/VBoxContainer/HBoxContainer"]
+texture_filter = 1
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_type_variation = &"big_button"
+theme_override_font_sizes/font_size = 55
+text = "WATER"
+
+[node name="Spacer_right" type="Control" parent="MarginContainer/Panel/BoxContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 3.0
+
+[node name="Spacer_middle" type="Control" parent="MarginContainer/Panel/BoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.1
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="MarginContainer/Panel/BoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.5
+
+[node name="Spacer_left2" type="Control" parent="MarginContainer/Panel/BoxContainer/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.2
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="MarginContainer/Panel/BoxContainer/VBoxContainer/HBoxContainer2" groups=["waterFill"]]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.5
+step = 0.0
+nine_patch_stretch = true
+stretch_margin_left = 24
+stretch_margin_top = 24
+stretch_margin_right = 24
+stretch_margin_bottom = 24
+texture_under = ExtResource("5_ia2ij")
+texture_progress = ExtResource("6_ubs8n")
+
+[node name="Spacer_right2" type="Control" parent="MarginContainer/Panel/BoxContainer/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.2
+
+[node name="Spacer_bottom" type="Control" parent="MarginContainer/Panel/BoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 4.0
+
+[node name="closeButton" type="TextureButton" parent="."]
+texture_filter = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 798.0
+offset_top = -486.0
+offset_right = 862.0
+offset_bottom = -422.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.7, 0.7)
+size_flags_horizontal = 8
+size_flags_vertical = 0
+size_flags_stretch_ratio = 3.0
+tooltip_text = "Close"
+texture_normal = ExtResource("5_2odoe")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+volume_db = -10.0
+
+[connection signal="pressed" from="MarginContainer/Panel/BoxContainer/VBoxContainer/HBoxContainer/water_button" to="." method="_on_water_button_pressed"]
+[connection signal="pressed" from="closeButton" to="." method="_on_close_button_pressed"]

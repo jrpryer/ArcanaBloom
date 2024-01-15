@@ -2,6 +2,7 @@ extends StaticBody2D
 class_name InventoryItem_seed
 
 @export var seedName: String = "color"
+@export var seedTexture: SpriteFrames
 
 #@onready var Seed = get_tree().get_first_node_in_group("seed")
 @onready var interaction_area: InteractionArea = $InteractionArea
@@ -12,22 +13,29 @@ class_name InventoryItem_seed
 @onready var progression_sound = preload("res://assets/sounds/AC_Correct_Answer_01v2.wav")
 @onready var pickup_sound = preload("res://assets/sounds/Bag 04.wav")
 
+@onready var lines1: Array[String] = [
+	"A new seed!"
+	#seedName #DEBUG
+]
+
+#const lines1: Array[String] = [
+##	"A new seed!",
+	#seedName
+#]
 
 var add_seed: Callable = func():
 	pass
 
 #signal adding_seed()
 
-const lines1: Array[String] = [
-#	"A new seed!",
-	"Ayyy"
-]
+
 const lines2: Array[String] = [
 	"I should plant it.",
 	"You know, just to be sure."
 ]
 
 func _ready():
+	sprite.sprite_frames = seedTexture
 	sprite.play("animate")
 	interaction_area.interact = Callable(self, "_on_interact")
 	
@@ -38,7 +46,7 @@ func _on_interact():
 	
 #	adding_seed.emit()
 	#SeedsBar.register_seed(self)
-	SeedsBar.register_seed("blue1")
+	SeedsBar.register_seed(seedName)
 	# Add Seed to hotbar? make it obvious we have unplanted seeds in our "inventory"
 	
 	# pickup sound fire

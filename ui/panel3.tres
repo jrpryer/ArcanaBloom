@@ -1,0 +1,14 @@
+[gd_resource type="StyleBoxTexture" load_steps=2 format=3 uid="uid://dnmicfmqn34qf"]
+
+[ext_resource type="Texture2D" uid="uid://uco2qc4ehqqd" path="res://ui/textures/panel3.png" id="1_dn5tb"]
+
+[resource]
+content_margin_left = 35.0
+content_margin_top = 20.0
+content_margin_right = 35.0
+content_margin_bottom = 20.0
+texture = ExtResource("1_dn5tb")
+texture_margin_left = 54.0
+texture_margin_top = 54.0
+texture_margin_right = 54.0
+texture_margin_bottom = 54.0
