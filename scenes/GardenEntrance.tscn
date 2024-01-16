@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://dxrt8rb3f1f0"]
+[gd_scene load_steps=30 format=3 uid="uid://dxrt8rb3f1f0"]
 
 [ext_resource type="Texture2D" uid="uid://cne8vgkm5jk4k" path="res://assets/stoneTile3.png" id="2_k7xcm"]
 [ext_resource type="Texture2D" uid="uid://b68hey45i6t4g" path="res://assets/stoneTile4.png" id="3_5cmfy"]
@@ -9,11 +9,13 @@
 [ext_resource type="PackedScene" uid="uid://djxxnw0bbx0yb" path="res://scenes/tileEdge_right.tscn" id="4_pxsg5"]
 [ext_resource type="PackedScene" uid="uid://dtn5cmj8a0huu" path="res://scenes/tileEdge_center.tscn" id="5_35xn3"]
 [ext_resource type="PackedScene" uid="uid://dkrckme5qeqv" path="res://scenes/seed.tscn" id="9_flyvp"]
-[ext_resource type="PackedScene" uid="uid://c1shupr7ur2op" path="res://ui/scenes/book.tscn" id="10_5ypdq"]
+[ext_resource type="PackedScene" uid="uid://c1shupr7ur2op" path="res://ui/scenes/book_ui.tscn" id="10_5ypdq"]
 [ext_resource type="PackedScene" uid="uid://b7cm47sffldf2" path="res://ui/scenes/Main_HUD.tscn" id="10_lfq4b"]
 [ext_resource type="PackedScene" uid="uid://cc7e6qukt0kay" path="res://scenes/woodenPlot.tscn" id="11_m3oqb"]
-[ext_resource type="PackedScene" uid="uid://ca372k80sbl1d" path="res://ui/scenes/water_plant.tscn" id="11_oiv2c"]
+[ext_resource type="PackedScene" uid="uid://ca372k80sbl1d" path="res://ui/scenes/water_ui.tscn" id="11_oiv2c"]
+[ext_resource type="PackedScene" uid="uid://eu106ff6mela" path="res://ui/scenes/plant_ui.tscn" id="12_enqfl"]
 [ext_resource type="PackedScene" uid="uid://bygu2lprnugxr" path="res://scenes/door1_left.tscn" id="13_apkfn"]
+[ext_resource type="PackedScene" uid="uid://dhrxqr1eei2au" path="res://ui/scenes/door_ui.tscn" id="13_dsgtx"]
 [ext_resource type="SpriteFrames" uid="uid://dqcg5ims8axl" path="res://assets/seeds/seed_blue_frames.tres" id="13_lxnfm"]
 [ext_resource type="SpriteFrames" uid="uid://bn0blb3t6gc0k" path="res://assets/seeds/seed_red_frames.tres" id="14_koudh"]
 [ext_resource type="SpriteFrames" uid="uid://dlfo4syv65u3l" path="res://assets/seeds/seed_orange_frames.tres" id="15_sk7c8"]
@@ -92,10 +94,16 @@ y_sort_enabled = true
 
 [node name="HUD" parent="." instance=ExtResource("10_lfq4b")]
 
-[node name="Book" parent="HUD" groups=["bookUI"] instance=ExtResource("10_5ypdq")]
+[node name="book_ui" parent="HUD" instance=ExtResource("10_5ypdq")]
 visible = false
 
 [node name="water_ui" parent="HUD" instance=ExtResource("11_oiv2c")]
+visible = false
+
+[node name="plant_ui" parent="HUD" instance=ExtResource("12_enqfl")]
+visible = false
+
+[node name="door_ui" parent="HUD" instance=ExtResource("13_dsgtx")]
 visible = false
 
 [node name="woodenPlot" parent="." instance=ExtResource("11_m3oqb")]

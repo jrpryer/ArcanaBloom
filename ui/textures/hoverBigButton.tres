@@ -1,0 +1,10 @@
+[gd_resource type="StyleBoxTexture" load_steps=2 format=3 uid="uid://dihhqhbqqj26k"]
+
+[ext_resource type="Texture2D" uid="uid://beyrmt6r0s4et" path="res://ui/textures/big_button_hover.png" id="1_fomti"]
+
+[resource]
+texture = ExtResource("1_fomti")
+texture_margin_left = 53.0
+texture_margin_top = 53.0
+texture_margin_right = 54.0
+texture_margin_bottom = 54.0

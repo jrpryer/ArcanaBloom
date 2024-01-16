@@ -1,21 +1,23 @@
-[gd_scene load_steps=15 format=3 uid="uid://b7cm47sffldf2"]
+[gd_scene load_steps=16 format=3 uid="uid://b7cm47sffldf2"]
 
 [ext_resource type="Texture2D" uid="uid://pjnri1v11tx8" path="res://ui/textures/settings.png" id="1_c0tst"]
+[ext_resource type="Script" path="res://src/Main_HUD.gd" id="1_mwhub"]
 [ext_resource type="Texture2D" uid="uid://73y38rkqg37k" path="res://ui/textures/UI_Lower.png" id="2_86blk"]
 [ext_resource type="Texture2D" uid="uid://bbb6cj3wn7chm" path="res://assets/essenceBlue.png" id="2_glaes"]
-[ext_resource type="Script" path="res://src/dockController.gd" id="2_wxcti"]
+[ext_resource type="Script" path="res://src/DockController.gd" id="2_xsron"]
 [ext_resource type="Texture2D" uid="uid://cuyhrbu0yptn5" path="res://ui/textures/panel2.png" id="3_atce6"]
 [ext_resource type="Texture2D" uid="uid://w1u62ib488q8" path="res://assets/essenceRed.png" id="3_knsfq"]
 [ext_resource type="FontFile" uid="uid://dgmam42gwcx1v" path="res://ui/fonts/HTOWERT.TTF" id="3_pkrtq"]
 [ext_resource type="Texture2D" uid="uid://n6hrdcsbkxel" path="res://assets/essenceOrange.png" id="4_r4281"]
 [ext_resource type="Texture2D" uid="uid://dyeht2qjx48ln" path="res://assets/essenceWhite.png" id="5_ty8aa"]
-[ext_resource type="Texture2D" uid="uid://gx2m7hr3aqre" path="res://assets/seeds/seedBasic.png" id="9_u01rf"]
 [ext_resource type="Texture2D" uid="uid://kvjbcf0fed7" path="res://ui/textures/button1.png" id="10_70axk"]
-[ext_resource type="Script" path="res://src/seedsBar.gd" id="11_seg54"]
-[ext_resource type="PackedScene" uid="uid://dpearqneqfuya" path="res://ui/scenes/textFeed.tscn" id="12_yhccp"]
+[ext_resource type="Script" path="res://src/SeedsBar.gd" id="11_lilyq"]
+[ext_resource type="PackedScene" uid="uid://dpearqneqfuya" path="res://ui/scenes/text_Feed.tscn" id="12_yhccp"]
+[ext_resource type="SpriteFrames" uid="uid://vot0lvm3a3jf" path="res://assets/seeds/seed_dull_frames.tres" id="13_em68l"]
 [ext_resource type="Texture2D" uid="uid://dpq601mbaksag" path="res://ui/textures/book.png" id="14_pyj1v"]
 
 [node name="HUD" type="CanvasLayer"]
+script = ExtResource("1_mwhub")
 
 [node name="settingButton" type="TextureButton" parent="."]
 texture_filter = 1
@@ -26,7 +28,7 @@ offset_bottom = 51.0
 scale = Vector2(3, 3)
 texture_normal = ExtResource("1_c0tst")
 
-[node name="dockControl" type="Control" parent="."]
+[node name="dockControl" type="Control" parent="." groups=["dockControl"]]
 layout_mode = 3
 anchors_preset = 7
 anchor_left = 0.5
@@ -40,7 +42,7 @@ offset_bottom = -10.0
 grow_horizontal = 2
 grow_vertical = 0
 size_flags_horizontal = 3
-script = ExtResource("2_wxcti")
+script = ExtResource("2_xsron")
 
 [node name="dockPanelContainer" type="PanelContainer" parent="dockControl"]
 layout_mode = 1
@@ -174,7 +176,7 @@ layout_mode = 2
 texture = ExtResource("10_70axk")
 stretch_mode = 5
 
-[node name="countBlue" type="Label" parent="EssenceBars/colorGridContainer/textBox1"]
+[node name="countBlue" type="Label" parent="EssenceBars/colorGridContainer/textBox1" groups=["essenceBlue"]]
 texture_filter = 1
 layout_mode = 0
 offset_top = -1.0
@@ -192,7 +194,7 @@ layout_mode = 2
 texture = ExtResource("10_70axk")
 stretch_mode = 5
 
-[node name="countRed" type="Label" parent="EssenceBars/colorGridContainer/textBox2"]
+[node name="countRed" type="Label" parent="EssenceBars/colorGridContainer/textBox2" groups=["essenceRed"]]
 texture_filter = 1
 layout_mode = 0
 offset_top = -1.0
@@ -210,7 +212,7 @@ layout_mode = 2
 texture = ExtResource("10_70axk")
 stretch_mode = 5
 
-[node name="countOrange" type="Label" parent="EssenceBars/colorGridContainer/textBox3"]
+[node name="countOrange" type="Label" parent="EssenceBars/colorGridContainer/textBox3" groups=["essenceOrange"]]
 texture_filter = 1
 layout_mode = 0
 offset_top = -1.0
@@ -228,7 +230,7 @@ layout_mode = 2
 texture = ExtResource("10_70axk")
 stretch_mode = 5
 
-[node name="countWhite" type="Label" parent="EssenceBars/colorGridContainer/textBox4"]
+[node name="countWhite" type="Label" parent="EssenceBars/colorGridContainer/textBox4" groups=["essenceWhite"]]
 texture_filter = 1
 layout_mode = 0
 offset_top = -1.0
@@ -262,7 +264,7 @@ offset_right = -361.0
 offset_bottom = -51.0
 grow_horizontal = 0
 grow_vertical = 0
-script = ExtResource("11_seg54")
+script = ExtResource("11_lilyq")
 
 [node name="seedsBox" type="TextureRect" parent="seedsBar"]
 texture_filter = 1
@@ -285,22 +287,11 @@ text = "0"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="seedIcon" type="TextureRect" parent="seedsBar"]
+[node name="seedIcon" type="AnimatedSprite2D" parent="seedsBar" groups=["seedIcon"]]
 texture_filter = 1
-layout_mode = 1
-anchors_preset = 3
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -30.0
-offset_top = -53.0
-offset_right = 50.0
-offset_bottom = 107.0
-grow_horizontal = 0
-grow_vertical = 0
-scale = Vector2(0.5, 0.5)
-texture = ExtResource("9_u01rf")
+position = Vector2(26, 26)
+scale = Vector2(1, 1.17188)
+sprite_frames = ExtResource("13_em68l")
 
 [node name="bookButton" type="TextureButton" parent="."]
 anchors_preset = 7
@@ -326,4 +317,4 @@ offset_right = 1219.0
 offset_bottom = 51.0
 grow_vertical = 0
 
-[connection signal="pressed" from="bookButton" to="dockControl" method="_on_book_button_pressed"]
+[connection signal="pressed" from="bookButton" to="." method="_on_book_button_pressed"]

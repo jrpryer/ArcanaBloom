@@ -1,0 +1,10 @@
+[gd_resource type="StyleBoxTexture" load_steps=2 format=3 uid="uid://ys3fusoml7pk"]
+
+[ext_resource type="Texture2D" uid="uid://ndiox0mpr348" path="res://ui/textures/big_button_pressed.png" id="1_mloop"]
+
+[resource]
+texture = ExtResource("1_mloop")
+texture_margin_left = 53.0
+texture_margin_top = 53.0
+texture_margin_right = 54.0
+texture_margin_bottom = 54.0

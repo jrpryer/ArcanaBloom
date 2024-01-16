@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=20 format=3 uid="uid://dewhnganfla67"]
+[gd_resource type="Theme" load_steps=19 format=3 uid="uid://dewhnganfla67"]
 
 [ext_resource type="FontFile" uid="uid://dgmam42gwcx1v" path="res://ui/fonts/HTOWERT.TTF" id="1_vyqpf"]
 [ext_resource type="Texture2D" uid="uid://kvjbcf0fed7" path="res://ui/textures/button1.png" id="2_7yopi"]
@@ -8,9 +8,10 @@
 [ext_resource type="Texture2D" uid="uid://bpks5flxwnd13" path="res://ui/textures/button1_pressed.png" id="4_2j18x"]
 [ext_resource type="Texture2D" uid="uid://bdmj2isotm1k3" path="res://ui/textures/plant_panel.png" id="4_lo2a3"]
 [ext_resource type="Texture2D" uid="uid://73y38rkqg37k" path="res://ui/textures/UI_Lower.png" id="5_3i4yx"]
-[ext_resource type="Texture2D" uid="uid://dnsiasj0lkni0" path="res://ui/textures/big_button.png" id="6_ptg2d"]
+[ext_resource type="StyleBox" uid="uid://dihhqhbqqj26k" path="res://ui/textures/hoverBigButton.tres" id="8_lwkd1"]
 [ext_resource type="Texture2D" uid="uid://beyrmt6r0s4et" path="res://ui/textures/big_button_hover.png" id="8_yw55b"]
-[ext_resource type="Texture2D" uid="uid://ndiox0mpr348" path="res://ui/textures/big_button_pressed.png" id="10_3hbea"]
+[ext_resource type="StyleBox" uid="uid://cgrvqsdsfw8s5" path="res://ui/textures/normalBigButton.tres" id="9_jn3uu"]
+[ext_resource type="StyleBox" uid="uid://ys3fusoml7pk" path="res://ui/textures/pressedBigButton.tres" id="10_8unjn"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_l6rmw"]
 texture = ExtResource("2_20kqk")
@@ -41,34 +42,19 @@ texture_margin_right = 79.0
 texture_margin_bottom = 60.0
 region_rect = Rect2(0, 0, 160, 160)
 
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_wy5ku"]
-texture = ExtResource("8_yw55b")
-texture_margin_left = 53.0
-texture_margin_top = 53.0
-texture_margin_right = 54.0
-texture_margin_bottom = 54.0
-
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_7v4nt"]
-texture = ExtResource("6_ptg2d")
-texture_margin_left = 53.0
-texture_margin_top = 53.0
-texture_margin_right = 54.0
-texture_margin_bottom = 53.0
-region_rect = Rect2(0, 0, 159, 159)
-
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_0xaxm"]
-texture = ExtResource("10_3hbea")
-texture_margin_left = 53.0
-texture_margin_top = 53.0
-texture_margin_right = 54.0
-texture_margin_bottom = 54.0
-
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ryeqa"]
 texture = ExtResource("5_3i4yx")
 texture_margin_left = 48.0
 texture_margin_top = 32.0
 texture_margin_right = 48.0
 texture_margin_bottom = 64.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_47yav"]
+texture = ExtResource("8_yw55b")
+texture_margin_left = 53.0
+texture_margin_top = 53.0
+texture_margin_right = 54.0
+texture_margin_bottom = 54.0
 
 [resource]
 Button/colors/font_color = Color(0.988235, 0.964706, 0.945098, 1)
@@ -104,8 +90,13 @@ WorldText/fonts/font = ExtResource("1_vyqpf")
 big_button/base_type = &"Button"
 big_button/colors/font_color = Color(0.988235, 0.964706, 0.945098, 1)
 big_button/colors/font_pressed_color = Color(0.678431, 0.666667, 0.65098, 1)
-big_button/styles/hover = SubResource("StyleBoxTexture_wy5ku")
-big_button/styles/normal = SubResource("StyleBoxTexture_7v4nt")
-big_button/styles/pressed = SubResource("StyleBoxTexture_0xaxm")
+big_button/styles/hover = ExtResource("8_lwkd1")
+big_button/styles/normal = ExtResource("9_jn3uu")
+big_button/styles/pressed = ExtResource("10_8unjn")
 panel3_overgrown/base_type = &"PanelContainer"
 panel3_overgrown/styles/panel = SubResource("StyleBoxTexture_ryeqa")
+plaque/base_type = &"Button"
+plaque/styles/disabled = SubResource("StyleBoxTexture_47yav")
+plaque/styles/hover = ExtResource("8_lwkd1")
+plaque/styles/normal = ExtResource("9_jn3uu")
+plaque/styles/pressed = ExtResource("10_8unjn")

@@ -6,7 +6,7 @@
 [ext_resource type="StyleBox" uid="uid://dr1jhqgo7vrtr" path="res://ui/panel1.tres" id="3_0w2nl"]
 [ext_resource type="Texture2D" uid="uid://dgv2exfc8ucwh" path="res://ui/textures/Close.png" id="5_50nrt"]
 
-[node name="Book" type="CanvasLayer"]
+[node name="book_ui" type="CanvasLayer" groups=["book_UI"]]
 script = ExtResource("1_prf64")
 
 [node name="ColorRect" type="ColorRect" parent="."]
@@ -71,6 +71,10 @@ text = "Lore Journal"
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="Spacer2" type="Control" parent="MarginContainer/PanelContainer/HBoxContainer/journalPanel/VBoxContainer1"]
+layout_mode = 2
+size_flags_vertical = 3
+
 [node name="discoveryList" type="VBoxContainer" parent="MarginContainer/PanelContainer/HBoxContainer/journalPanel/VBoxContainer1"]
 layout_mode = 2
 
@@ -78,24 +82,48 @@ layout_mode = 2
 texture_filter = 1
 layout_mode = 2
 theme_override_font_sizes/font_size = 25
-text = "
-- Discovery 1
-- Discovery 2"
-
-[node name="Spacer1" type="Control" parent="MarginContainer/PanelContainer/HBoxContainer/journalPanel/VBoxContainer1"]
-layout_mode = 2
-size_flags_vertical = 3
+text = "Dev debug menu"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
 
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/PanelContainer/HBoxContainer/journalPanel/VBoxContainer1"]
 layout_mode = 2
 alignment = 1
 
+[node name="Spacer" type="Control" parent="MarginContainer/PanelContainer/HBoxContainer/journalPanel/VBoxContainer1/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
 [node name="Button" type="Button" parent="MarginContainer/PanelContainer/HBoxContainer/journalPanel/VBoxContainer1/HBoxContainer"]
 texture_filter = 1
 layout_mode = 2
 size_flags_horizontal = 3
+size_flags_stretch_ratio = 4.0
 theme_override_font_sizes/font_size = 22
-text = "Tracking"
+toggle_mode = true
+text = "Instant Water?"
+
+[node name="Spacer2" type="Control" parent="MarginContainer/PanelContainer/HBoxContainer/journalPanel/VBoxContainer1/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Button2" type="Button" parent="MarginContainer/PanelContainer/HBoxContainer/journalPanel/VBoxContainer1/HBoxContainer"]
+texture_filter = 1
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 4.0
+theme_override_font_sizes/font_size = 22
+text = "Give 1 White seed"
+
+[node name="Spacer3" type="Control" parent="MarginContainer/PanelContainer/HBoxContainer/journalPanel/VBoxContainer1/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Spacer1" type="Control" parent="MarginContainer/PanelContainer/HBoxContainer/journalPanel/VBoxContainer1"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 4.0
 
 [node name="bookPanel" type="PanelContainer" parent="MarginContainer/PanelContainer/HBoxContainer"]
 texture_filter = 1
@@ -133,4 +161,8 @@ size_flags_stretch_ratio = 3.0
 tooltip_text = "Close"
 texture_normal = ExtResource("5_50nrt")
 
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+
+[connection signal="toggled" from="MarginContainer/PanelContainer/HBoxContainer/journalPanel/VBoxContainer1/HBoxContainer/Button" to="." method="_on_water_button_toggled"]
+[connection signal="pressed" from="MarginContainer/PanelContainer/HBoxContainer/journalPanel/VBoxContainer1/HBoxContainer/Button2" to="." method="_on_seed_button_pressed"]
 [connection signal="pressed" from="closeButton" to="." method="_on_close_button_pressed"]

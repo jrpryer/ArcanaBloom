@@ -6,7 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://dg18h4f07dtwj" path="res://interaction/interact area/interaction_area.tscn" id="4_mad4x"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_6on6f"]
-radius = 24.0
+radius = 32.0156
 
 [node name="Seed" type="StaticBody2D" groups=["seed", "seedInteract"]]
 collision_layer = 2
@@ -17,25 +17,25 @@ script = ExtResource("1_m3vyj")
 z_index = 2
 y_sort_enabled = true
 texture_filter = 1
-position = Vector2(0, -6)
+position = Vector2(0, -10)
 scale = Vector2(0.6, 0.6)
 sprite_frames = ExtResource("2_efrqa")
 animation = &"animate"
-autoplay = "animate"
 frame_progress = 0.432234
 
 [node name="Shadow" type="Sprite2D" parent="."]
 z_index = 1
 y_sort_enabled = true
-position = Vector2(0, 9)
+position = Vector2(0, 5)
 scale = Vector2(0.15, 0.151)
 texture = ExtResource("2_k2uo0")
 
 [node name="InteractionArea" parent="." instance=ExtResource("4_mad4x")]
+position = Vector2(0, 3)
 action_name = "Pickup"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionArea"]
-position = Vector2(0, 3)
+position = Vector2(0, -1)
 shape = SubResource("CircleShape2D_6on6f")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]

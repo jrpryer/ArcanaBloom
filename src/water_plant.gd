@@ -1,21 +1,16 @@
 extends CanvasLayer
 
-@onready var fillBar = get_tree().get_first_node_in_group("waterFill")
-@onready var plant = get_tree().get_first_node_in_group("plant")
-@onready var particles = get_tree().get_first_node_in_group("particles")
+@onready var fillBar = $MarginContainer/Panel/BoxContainer/VBoxContainer/HBoxContainer2/waterFill
+@onready var plant_image = $MarginContainer/Panel/plant_window/plant
+@onready var particles = $MarginContainer/Panel/plant_window/VBoxContainer/particles
+@onready var water_button = $MarginContainer/Panel/BoxContainer/VBoxContainer/HBoxContainer/water_button
 @onready var watering_sound = preload("res://assets/sounds/Splash Small 2_2.wav")
 
 @onready var audio_player = $AudioStreamPlayer
 
-var plantedSeed: String
-var seedGrowthState: int
-#var seedGrowthState: int:
-	#set(value):
-		#print(value)
-		#var particle_timer = get_tree().create_timer(1.0)
-		#particles.visible = true
-		#await particle_timer.timeout
-		#particles.visible = false
+@onready var currentPlot: Node2D
+@onready var plantedSeed: String
+@onready var seedGrowthState: int
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -24,8 +19,48 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
-	if Input.is_action_pressed("ui_cancel"):
-		UiManager.toggle_ui(self, false, "water_ui")
+# Modulate texture as plant grows/shrinks
+	match plantedSeed:
+		"blue1":
+			match seedGrowthState:
+				1: 
+					plant_image.texture = load("res://assets/plots/plotBlue_stage1.png")
+				2: 
+					plant_image.texture = load("res://assets/plots/plotBlue_stage2.png")
+				3: 
+					plant_image.texture = load("res://assets/plots/plotBlue_stage2.png")
+				4: 
+					plant_image.texture = load("res://assets/plots/plotBlue_stage2.png")
+		"red1":
+			match seedGrowthState:
+				1: 
+					plant_image.texture = load("res://assets/plots/plotRed_stage1.png")
+				2: 
+					plant_image.texture = load("res://assets/plots/plotRed_stage2.png")
+				3: 
+					plant_image.texture = load("res://assets/plots/plotRed_stage2.png")
+				4: 
+					plant_image.texture = load("res://assets/plots/plotRed_stage2.png")
+		"orange1":
+			match seedGrowthState:
+				1: 
+					plant_image.texture = load("res://assets/plots/plotOrange_stage1.png")
+				2: 
+					plant_image.texture = load("res://assets/plots/plotOrange_stage2.png")
+				3: 
+					plant_image.texture = load("res://assets/plots/plotOrange_stage2.png")
+				4: 
+					plant_image.texture = load("res://assets/plots/plotOrange_stage2.png")
+		"white1":
+			match seedGrowthState:
+				1: 
+					plant_image.texture = load("res://assets/plots/plotWhite_stage1.png")
+				2: 
+					plant_image.texture = load("res://assets/plots/plotWhite_stage2.png")
+				3: 
+					plant_image.texture = load("res://assets/plots/plotWhite_stage2.png")
+				4: 
+					plant_image.texture = load("res://assets/plots/plotWhite_stage2.png")
 
 	# Set seedGrowthState by water level
 	if fillBar.value >= 33 && fillBar.value < 66:
@@ -38,61 +73,45 @@ func _process(_delta):
 	else:
 		seedGrowthState = 1
 	
-	
-	# Modulate texture as plant grows/shrinks
-	match plantedSeed:
-		"blue1":
-			match seedGrowthState:
-				1: 
-					plant.texture = load("res://assets/plots/plotBlue_stage1.png")
-		"red1":
-			match seedGrowthState:
-				1: 
-					plant.texture = load("res://assets/plots/plotRed_stage1.png")
-		"orange1":
-			match seedGrowthState:
-				1: 
-					plant.texture = load("res://assets/plots/plotOrange_stage1.png")
-		"white1":
-			match seedGrowthState:
-				1: 
-					plant.texture = load("res://assets/plots/plotWhite_stage1.png")
-
-
-#### DEBUG
-	#if Input.is_action_pressed("DEBUG_testWater"):
-		##self.visible = true
-		##UiManager.menu_active = true
-		#UiManager.toggle_ui(self, true, "water_ui")
-#### DEBUG
-	
 	if fillBar.value < 100:
 		fillBar.value -= 0.07
-	else:
-		return
+	if fillBar.value == 100:
+		water_button.disabled = true
+		water_button.text = "GROWN!"
+
+func _input(event):
+	if event.is_action_pressed("ui_cancel") && self.visible:
+		UiManager.toggle_ui(self, false)
 	
-func load_plant(seedSent: String, growthState: int):
+func load_plant(plotNode: Node2D, seedSent: String, growthState: int):
+	currentPlot = plotNode
 	seedGrowthState = growthState
 	plantedSeed = seedSent
 	if plantedSeed == "blue1":
-		plant.texture = load("res://assets/plots/plotBlue_stage1.png")
+		plant_image.texture = load("res://assets/plots/plotBlue_stage1.png")
 	if plantedSeed == "red1":
-		plant.texture = load("res://assets/plots/plotRed_stage1.png")
+		plant_image.texture = load("res://assets/plots/plotRed_stage1.png")
 	if plantedSeed == "orange1":
-		plant.texture = load("res://assets/plots/plotOrange_stage1.png")
+		plant_image.texture = load("res://assets/plots/plotOrange_stage1.png")
 	if plantedSeed == "white1":
-		plant.texture = load("res://assets/plots/plotWhite_stage1.png")
+		plant_image.texture = load("res://assets/plots/plotWhite_stage1.png")
 	
-func ui_open():
+func _on_ui_open():
 	fillBar.value = 0
+	#seedGrowthState = 0
 	particles.visible = false #DEBUG
+	water_button.disabled = false
+	water_button.text = "WATER"
+	
+func _on_ui_close():
+	currentPlot.update_plot(seedGrowthState)
 	
 func _on_water_button_pressed():
 	fillBar.value += 4
 	audio_player.play()
-	
+	if UiManager.dev_debug_mode:
+		fillBar.value = 100
 
 func _on_close_button_pressed():
 	#Input.action_press("ui_cancel")
-	self.visible = false
-	UiManager.menu_active = false
+	UiManager.toggle_ui(self, false)

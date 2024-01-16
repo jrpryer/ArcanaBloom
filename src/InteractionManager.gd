@@ -41,6 +41,8 @@ func _sort_by_distance_to_player(area1, area2):
 
 
 func _input(event):
+	if DialogManager.is_dialog_active || UiManager.menu_active:
+		return
 	if event.is_action_pressed("interact") && can_interact:
 		if active_areas.size() > 0:
 			can_interact = false

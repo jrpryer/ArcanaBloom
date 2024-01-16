@@ -1,11 +1,14 @@
 extends StaticBody2D
 class_name Plantable
 
-@onready var water_ui = get_tree().get_first_node_in_group("waterUI")
 @onready var seedCount = get_tree().get_first_node_in_group("seedsBar").seedCount
+@onready var water_ui = get_tree().get_first_node_in_group("water_UI")
+@onready var plant_ui = get_tree().get_first_node_in_group("plant_UI")
+
 @onready var interaction_area: InteractionArea = $InteractionArea
-@onready var sprite = $plant_stalk
+@onready var plant = $plant_stalk
 @onready var audio_player = $AudioStreamPlayer
+@onready var spoken = DialogManager.plot_spoken
 
 @onready var speech_sound = preload("res://assets/sounds/UI_Menu_04.wav")
 @onready var progression_sound = preload("res://assets/sounds/AC_Correct_Answer_01v2.wav")
@@ -15,8 +18,9 @@ class_name Plantable
 
 var seed_interact = false
 var plot_interact = false
-#var plotSeed: Array[InventoryItem_seed]
+var plant_interact = false
 var seedGrowthState: int
+
 
 
 const lines: Array[String] = [
@@ -25,15 +29,20 @@ const lines: Array[String] = [
 
 func _ready():
 	interaction_area.interact = Callable(self, "_on_interact")
-	#self.check_plant = Callable(self, "_on_check_plant")
 	
 func _process(_delta):
 	if SeedsBar.seedBank.size() > 0 && plantedSeed == "empty":
 		seed_interact = true
 		$InteractionArea.can_interact = true
-	elif plantedSeed != "empty":
+	elif plantedSeed != "empty" && seedGrowthState < 4:
 		seed_interact = false
 		plot_interact = true
+		$InteractionArea.action_name = "Water"
+		$InteractionArea.can_interact = true
+	elif plantedSeed != "empty" && seedGrowthState == 4:
+		seed_interact = false
+		plot_interact = false
+		plant_interact = true
 		$InteractionArea.action_name = "Inspect"
 		$InteractionArea.can_interact = true
 	else:
@@ -44,39 +53,84 @@ func _process(_delta):
 func _on_interact():
 	if plantedSeed == "empty" && seed_interact:
 		plantedSeed = SeedsBar.seedBank.front()
-		# Remove Seed from hotbar.
+	# Remove Seed from hotbar.
 		SeedsBar.unregister_seed(plantedSeed)
-		#subtract_seed.emit()
-		
-		# Play plant_sound
+	# Play plant_sound
 		audio_player.stream = plant_sound
 		var new_audio_player = audio_player.duplicate()
 		get_tree().root.add_child(new_audio_player)
 		new_audio_player.play()
-		#await new_audio_player.finished
-		#new_audio_player.queue_free()
-		
-		# Give little message
-		DialogManager.start_dialog(lines, speech_sound)
-		#await DialogManager.dialog_finished
+		#await new_audio_player.finished #?? Need?
+		#new_audio_player.queue_free() #?? Need?
+	# Give little message
+		if !spoken:
+			DialogManager.start_dialog(lines, speech_sound)
+			#await DialogManager.dialog_finished
 
 	if plantedSeed != "empty" && seed_interact:
 		if plantedSeed == "blue1":
-			sprite.texture = load("res://assets/plots/plotBlue_stage1.png")
+			plant.texture = load("res://assets/plots/plotBlue_stage1.png")
 			seedGrowthState = 1
 		elif plantedSeed == "red1":
-			sprite.texture = load("res://assets/plots/plotRed_stage1.png")
+			plant.texture = load("res://assets/plots/plotRed_stage1.png")
 			seedGrowthState = 1
 		elif plantedSeed == "orange1":
-			sprite.texture = load("res://assets/plots/plotOrange_stage1.png")
+			plant.texture = load("res://assets/plots/plotOrange_stage1.png")
 			seedGrowthState = 1
 		elif plantedSeed == "white1":
-			sprite.texture = load("res://assets/plots/plotWhite_stage1.png")
+			plant.texture = load("res://assets/plots/plotWhite_stage1.png")
 			seedGrowthState = 1
 	
-	if plot_interact == true && seedGrowthState == 1:
-		water_ui.load_plant(plantedSeed, seedGrowthState)
-		UiManager.toggle_ui(water_ui, true, "water_ui")
+	#if plot_interact == true && seedGrowthState == 1: #?? Need?
+	if plot_interact == true:
+		water_ui.load_plant(self, plantedSeed, seedGrowthState)
+		UiManager.toggle_ui(water_ui, true)
+		
+# Opening the plant_ui
+	if plant_interact == true:
+		plant_ui.load_plant(plantedSeed)
+		UiManager.toggle_ui(plant_ui, true)
 
-func _on_check_plant():
-	return plantedSeed
+func update_plot(newGrowthState: int):
+	seedGrowthState = newGrowthState
+	match plantedSeed:
+		"blue1":
+			match seedGrowthState:
+				1: 
+					plant.texture = load("res://assets/plots/plotBlue_stage1.png")
+				2: 
+					plant.texture = load("res://assets/plots/plotBlue_stage2.png")
+				3: 
+					plant.texture = load("res://assets/plots/plotBlue_stage2.png")
+				4: 
+					plant.texture = load("res://assets/plots/plotBlue_stage2.png")
+		"red1":
+			match seedGrowthState:
+				1: 
+					plant.texture = load("res://assets/plots/plotRed_stage1.png")
+				2: 
+					plant.texture = load("res://assets/plots/plotRed_stage2.png")
+				3: 
+					plant.texture = load("res://assets/plots/plotRed_stage2.png")
+				4: 
+					plant.texture = load("res://assets/plots/plotRed_stage2.png")
+		"orange1":
+			match seedGrowthState:
+				1: 
+					plant.texture = load("res://assets/plots/plotOrange_stage1.png")
+				2: 
+					plant.texture = load("res://assets/plots/plotOrange_stage2.png")
+				3: 
+					plant.texture = load("res://assets/plots/plotOrange_stage2.png")
+				4: 
+					plant.texture = load("res://assets/plots/plotOrange_stage2.png")
+		"white1":
+			match seedGrowthState:
+				1: 
+					plant.texture = load("res://assets/plots/plotWhite_stage1.png")
+				2: 
+					plant.texture = load("res://assets/plots/plotWhite_stage2.png")
+				3: 
+					plant.texture = load("res://assets/plots/plotWhite_stage2.png")
+				4: 
+					plant.texture = load("res://assets/plots/plotWhite_stage2.png")
