@@ -13,8 +13,6 @@ class_name InventoryItem_seed
 @onready var progression_sound = preload("res://assets/sounds/AC_Correct_Answer_01v2.wav")
 @onready var pickup_sound = preload("res://assets/sounds/Bag 04.wav")
 
-var spoken = DialogManager.seed_spoken
-
 #@onready var lines1: Array[String] = [
 	#"A new seed!"
 	##seedName #DEBUG
@@ -36,12 +34,11 @@ func _ready():
 	interaction_area.interact = Callable(self, "_on_interact")
 	
 func _on_interact():
-	if !spoken:
+	if !DialogManager.seed_spoken:
 		DialogManager.start_dialog(lines1, speech_sound)
 		await DialogManager.dialog_finished
 		DialogManager.seed_spoken = true
-		print("has spoken?" + str(DialogManager.seed_spoken))
-	elif spoken:
+	elif DialogManager.seed_spoken:
 		DialogManager.start_dialog(lines2, speech_sound)
 		await DialogManager.dialog_finished
 	queue_free()

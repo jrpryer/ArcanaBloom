@@ -7,9 +7,9 @@ extends Node
 @onready var audio_player = get_tree().get_first_node_in_group("sfx")
 @onready var advance_sound = preload("res://assets/sounds/Click_Mouse.wav")
 
-@onready var seed_spoken = false
-@onready var plot_spoken = false
-@onready var door_spoken = false
+var seed_spoken = false
+var plot_spoken = false
+var door_spoken = false
 
 func _ready():
 	textFeed_scene.finished_displaying.connect(_on_text_popup_finished_displaying)

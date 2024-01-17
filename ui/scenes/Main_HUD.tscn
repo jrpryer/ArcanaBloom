@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://b7cm47sffldf2"]
+[gd_scene load_steps=17 format=3 uid="uid://b7cm47sffldf2"]
 
 [ext_resource type="Texture2D" uid="uid://pjnri1v11tx8" path="res://ui/textures/settings.png" id="1_c0tst"]
 [ext_resource type="Script" path="res://src/Main_HUD.gd" id="1_mwhub"]
@@ -10,6 +10,7 @@
 [ext_resource type="FontFile" uid="uid://dgmam42gwcx1v" path="res://ui/fonts/HTOWERT.TTF" id="3_pkrtq"]
 [ext_resource type="Texture2D" uid="uid://n6hrdcsbkxel" path="res://assets/essenceOrange.png" id="4_r4281"]
 [ext_resource type="Texture2D" uid="uid://dyeht2qjx48ln" path="res://assets/essenceWhite.png" id="5_ty8aa"]
+[ext_resource type="Script" path="res://src/essenceBars.gd" id="7_8yvhf"]
 [ext_resource type="Texture2D" uid="uid://kvjbcf0fed7" path="res://ui/textures/button1.png" id="10_70axk"]
 [ext_resource type="Script" path="res://src/SeedsBar.gd" id="11_lilyq"]
 [ext_resource type="PackedScene" uid="uid://dpearqneqfuya" path="res://ui/scenes/text_Feed.tscn" id="12_yhccp"]
@@ -45,6 +46,7 @@ size_flags_horizontal = 3
 script = ExtResource("2_xsron")
 
 [node name="dockPanelContainer" type="PanelContainer" parent="dockControl"]
+texture_filter = 1
 layout_mode = 1
 anchors_preset = 14
 anchor_top = 0.5
@@ -113,7 +115,7 @@ theme_override_font_sizes/font_size = 25
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="EssenceBars" type="Control" parent="."]
+[node name="essenceBars" type="Control" parent="." groups=["essenceBars"]]
 layout_mode = 3
 anchors_preset = 3
 anchor_left = 1.0
@@ -125,8 +127,9 @@ offset_top = -101.0
 offset_bottom = -10.0
 grow_horizontal = 0
 grow_vertical = 0
+script = ExtResource("7_8yvhf")
 
-[node name="colorGridContainer" type="GridContainer" parent="EssenceBars"]
+[node name="colorGridContainer" type="GridContainer" parent="essenceBars"]
 layout_mode = 1
 anchors_preset = 3
 anchor_left = 1.0
@@ -134,115 +137,147 @@ anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = -278.0
-offset_top = -120.0
+offset_top = -94.0
 offset_right = -117.0
-offset_bottom = -68.0
+offset_bottom = -42.0
 grow_horizontal = 0
 grow_vertical = 0
 scale = Vector2(1.6, 1.6)
 columns = 4
 
-[node name="essenceBlue" type="TextureRect" parent="EssenceBars/colorGridContainer"]
+[node name="essenceBlue" type="TextureRect" parent="essenceBars/colorGridContainer"]
 texture_filter = 1
 layout_mode = 2
 texture = ExtResource("2_glaes")
 expand_mode = 4
 stretch_mode = 5
 
-[node name="essenceRed" type="TextureRect" parent="EssenceBars/colorGridContainer"]
+[node name="essenceRed" type="TextureRect" parent="essenceBars/colorGridContainer"]
 texture_filter = 1
 layout_mode = 2
 texture = ExtResource("3_knsfq")
 expand_mode = 4
 stretch_mode = 5
 
-[node name="essenceOrange" type="TextureRect" parent="EssenceBars/colorGridContainer"]
+[node name="essenceOrange" type="TextureRect" parent="essenceBars/colorGridContainer"]
 texture_filter = 1
 layout_mode = 2
 texture = ExtResource("4_r4281")
 expand_mode = 4
 stretch_mode = 5
 
-[node name="essenceWhite" type="TextureRect" parent="EssenceBars/colorGridContainer"]
+[node name="essenceWhite" type="TextureRect" parent="essenceBars/colorGridContainer"]
 texture_filter = 1
 layout_mode = 2
 texture = ExtResource("5_ty8aa")
 expand_mode = 4
 stretch_mode = 5
 
-[node name="textBox1" type="TextureRect" parent="EssenceBars/colorGridContainer"]
+[node name="textBox1" type="TextureRect" parent="essenceBars/colorGridContainer"]
 texture_filter = 1
 layout_mode = 2
 texture = ExtResource("10_70axk")
 stretch_mode = 5
 
-[node name="countBlue" type="Label" parent="EssenceBars/colorGridContainer/textBox1" groups=["essenceBlue"]]
+[node name="countBlue" type="Label" parent="essenceBars/colorGridContainer/textBox1" groups=["essenceBlue"]]
 texture_filter = 1
-layout_mode = 0
-offset_top = -1.0
-offset_right = 32.0
-offset_bottom = 16.0
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -16.0
+offset_top = -8.5
+offset_right = 16.0
+offset_bottom = 8.5
+grow_horizontal = 2
+grow_vertical = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_font_sizes/font_size = 12
 text = "0"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="textBox2" type="TextureRect" parent="EssenceBars/colorGridContainer"]
+[node name="textBox2" type="TextureRect" parent="essenceBars/colorGridContainer"]
 texture_filter = 1
 layout_mode = 2
 texture = ExtResource("10_70axk")
 stretch_mode = 5
 
-[node name="countRed" type="Label" parent="EssenceBars/colorGridContainer/textBox2" groups=["essenceRed"]]
+[node name="countRed" type="Label" parent="essenceBars/colorGridContainer/textBox2" groups=["essenceRed"]]
 texture_filter = 1
-layout_mode = 0
-offset_top = -1.0
-offset_right = 32.0
-offset_bottom = 16.0
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -16.0
+offset_top = -8.5
+offset_right = 16.0
+offset_bottom = 8.5
+grow_horizontal = 2
+grow_vertical = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_font_sizes/font_size = 12
 text = "0"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="textBox3" type="TextureRect" parent="EssenceBars/colorGridContainer"]
+[node name="textBox3" type="TextureRect" parent="essenceBars/colorGridContainer"]
 texture_filter = 1
 layout_mode = 2
 texture = ExtResource("10_70axk")
 stretch_mode = 5
 
-[node name="countOrange" type="Label" parent="EssenceBars/colorGridContainer/textBox3" groups=["essenceOrange"]]
+[node name="countOrange" type="Label" parent="essenceBars/colorGridContainer/textBox3" groups=["essenceOrange"]]
 texture_filter = 1
-layout_mode = 0
-offset_top = -1.0
-offset_right = 32.0
-offset_bottom = 16.0
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -16.0
+offset_top = -8.5
+offset_right = 16.0
+offset_bottom = 8.5
+grow_horizontal = 2
+grow_vertical = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_font_sizes/font_size = 12
 text = "0"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="textBox4" type="TextureRect" parent="EssenceBars/colorGridContainer"]
+[node name="textBox4" type="TextureRect" parent="essenceBars/colorGridContainer"]
 texture_filter = 1
 layout_mode = 2
 texture = ExtResource("10_70axk")
 stretch_mode = 5
 
-[node name="countWhite" type="Label" parent="EssenceBars/colorGridContainer/textBox4" groups=["essenceWhite"]]
+[node name="countWhite" type="Label" parent="essenceBars/colorGridContainer/textBox4" groups=["essenceWhite"]]
 texture_filter = 1
-layout_mode = 0
-offset_top = -1.0
-offset_right = 32.0
-offset_bottom = 16.0
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -16.0
+offset_top = -8.5
+offset_right = 16.0
+offset_bottom = 8.5
+grow_horizontal = 2
+grow_vertical = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_font_sizes/font_size = 12
 text = "0"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="countGridContainer" type="GridContainer" parent="EssenceBars"]
+[node name="countGridContainer" type="GridContainer" parent="essenceBars"]
 layout_mode = 0
 offset_left = -3.0
 offset_top = -26.0
@@ -250,6 +285,9 @@ offset_right = 137.0
 offset_bottom = -2.0
 scale = Vector2(0.56, 0.56)
 columns = 4
+
+[node name="update_timer" type="Timer" parent="essenceBars"]
+one_shot = true
 
 [node name="seedsBar" type="Control" parent="." groups=["seedsBar"]]
 layout_mode = 3
@@ -276,11 +314,18 @@ expand_mode = 5
 
 [node name="seedUI" type="Label" parent="seedsBar/seedsBox" groups=["seedUI"]]
 texture_filter = 1
-layout_mode = 0
-offset_left = 43.0
-offset_top = 17.0
-offset_right = 83.0
-offset_bottom = 51.0
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -5.0
+offset_top = -17.0
+offset_right = 35.0
+offset_bottom = 17.0
+grow_horizontal = 2
+grow_vertical = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_font_sizes/font_size = 24
 text = "0"
@@ -305,6 +350,8 @@ offset_right = 80.0
 offset_bottom = -29.0
 grow_horizontal = 2
 grow_vertical = 0
+focus_mode = 0
+action_mode = 0
 texture_normal = ExtResource("14_pyj1v")
 
 [node name="TextFeed" parent="." groups=["textFeed"] instance=ExtResource("12_yhccp")]

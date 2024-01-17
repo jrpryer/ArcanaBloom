@@ -97,6 +97,6 @@ panel3_overgrown/base_type = &"PanelContainer"
 panel3_overgrown/styles/panel = SubResource("StyleBoxTexture_ryeqa")
 plaque/base_type = &"Button"
 plaque/styles/disabled = SubResource("StyleBoxTexture_47yav")
-plaque/styles/hover = ExtResource("8_lwkd1")
+plaque/styles/hover = ExtResource("9_jn3uu")
 plaque/styles/normal = ExtResource("9_jn3uu")
 plaque/styles/pressed = ExtResource("10_8unjn")

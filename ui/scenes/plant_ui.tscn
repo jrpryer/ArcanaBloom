@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://eu106ff6mela"]
+[gd_scene load_steps=11 format=3 uid="uid://eu106ff6mela"]
 
 [ext_resource type="Script" path="res://src/plant_ui.gd" id="1_2fqac"]
 [ext_resource type="StyleBox" uid="uid://dnmicfmqn34qf" path="res://ui/panel3.tres" id="2_68wlc"]
@@ -9,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://kvjbcf0fed7" path="res://ui/textures/button1.png" id="7_0srnv"]
 [ext_resource type="Texture2D" uid="uid://bbd4og732ob8t" path="res://ui/textures/button1_hover.png" id="8_rd3vg"]
 [ext_resource type="Texture2D" uid="uid://dgv2exfc8ucwh" path="res://ui/textures/Close.png" id="9_cq5hv"]
+[ext_resource type="Texture2D" uid="uid://beyrmt6r0s4et" path="res://ui/textures/big_button_hover.png" id="9_gjcx3"]
 
 [node name="plant_ui" type="CanvasLayer" groups=["plant_UI"]]
 script = ExtResource("1_2fqac")
@@ -232,36 +233,79 @@ size_flags_horizontal = 3
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="left_button" type="Button" parent="MarginContainer/Panel/BoxContainer/VBoxContainer/HBoxContainer/HBoxContainer"]
+[node name="left_button" type="TextureRect" parent="MarginContainer/Panel/BoxContainer/VBoxContainer/HBoxContainer/HBoxContainer" groups=["plantLeftButton"]]
 texture_filter = 1
 layout_mode = 2
-size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_type_variation = &"plaque"
-theme_override_colors/font_disabled_color = Color(1, 1, 1, 1)
+texture = ExtResource("9_gjcx3")
+expand_mode = 1
+
+[node name="Label" type="Label" parent="MarginContainer/Panel/BoxContainer/VBoxContainer/HBoxContainer/HBoxContainer/left_button"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -23.0
+offset_top = -30.0
+offset_right = 17.0
+offset_bottom = 26.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.988235, 0.964706, 0.945098, 1)
+theme_override_colors/font_shadow_color = Color(0.117647, 0.109804, 0.0470588, 0.721569)
+theme_override_constants/shadow_offset_x = 1
+theme_override_constants/shadow_offset_y = 2
 theme_override_font_sizes/font_size = 55
-disabled = true
 text = "<"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="HBoxContainer3" type="VBoxContainer" parent="MarginContainer/Panel/BoxContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="up_button" type="Button" parent="MarginContainer/Panel/BoxContainer/VBoxContainer/HBoxContainer/HBoxContainer3"]
+[node name="Control2" type="Control" parent="MarginContainer/Panel/BoxContainer/VBoxContainer/HBoxContainer/HBoxContainer3"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.3
+
+[node name="up_button" type="TextureRect" parent="MarginContainer/Panel/BoxContainer/VBoxContainer/HBoxContainer/HBoxContainer3" groups=["plantUpButton"]]
 texture_filter = 1
 layout_mode = 2
-size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_type_variation = &"plaque"
-theme_override_colors/font_disabled_color = Color(1, 1, 1, 1)
-theme_override_font_sizes/font_size = 45
-disabled = true
+texture = ExtResource("9_gjcx3")
+expand_mode = 1
+
+[node name="Label" type="Label" parent="MarginContainer/Panel/BoxContainer/VBoxContainer/HBoxContainer/HBoxContainer3/up_button"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -21.0
+offset_right = 20.0
+offset_bottom = 35.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.988235, 0.964706, 0.945098, 1)
+theme_override_colors/font_shadow_color = Color(0.117647, 0.109804, 0.0470588, 0.721569)
+theme_override_constants/shadow_offset_x = 1
+theme_override_constants/shadow_offset_y = 2
+theme_override_font_sizes/font_size = 55
 text = "^"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="Control" type="Control" parent="MarginContainer/Panel/BoxContainer/VBoxContainer/HBoxContainer/HBoxContainer3"]
 layout_mode = 2
 size_flags_vertical = 3
-size_flags_stretch_ratio = 1.27
+size_flags_stretch_ratio = 0.7
 
 [node name="HBoxContainer2" type="VBoxContainer" parent="MarginContainer/Panel/BoxContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
@@ -271,16 +315,35 @@ size_flags_horizontal = 3
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="right_button" type="Button" parent="MarginContainer/Panel/BoxContainer/VBoxContainer/HBoxContainer/HBoxContainer2"]
+[node name="right_button" type="TextureRect" parent="MarginContainer/Panel/BoxContainer/VBoxContainer/HBoxContainer/HBoxContainer2" groups=["plantRightButton"]]
 texture_filter = 1
 layout_mode = 2
-size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_type_variation = &"plaque"
-theme_override_colors/font_disabled_color = Color(1, 1, 1, 1)
+texture = ExtResource("9_gjcx3")
+expand_mode = 1
+
+[node name="Label" type="Label" parent="MarginContainer/Panel/BoxContainer/VBoxContainer/HBoxContainer/HBoxContainer2/right_button"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -17.0
+offset_top = -32.0
+offset_right = 23.0
+offset_bottom = 24.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.988235, 0.964706, 0.945098, 1)
+theme_override_colors/font_shadow_color = Color(0.117647, 0.109804, 0.0470588, 0.721569)
+theme_override_constants/shadow_offset_x = 1
+theme_override_constants/shadow_offset_y = 2
 theme_override_font_sizes/font_size = 55
-disabled = true
 text = ">"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="Spacer_right" type="Control" parent="MarginContainer/Panel/BoxContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
@@ -300,10 +363,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = 494.0
-offset_top = -486.0
-offset_right = 558.0
-offset_bottom = -422.0
+offset_left = 472.0
+offset_top = -508.0
+offset_right = 599.0
+offset_bottom = -381.0
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(0.7, 0.7)
@@ -312,6 +375,7 @@ size_flags_vertical = 0
 size_flags_stretch_ratio = 3.0
 tooltip_text = "Close"
 texture_normal = ExtResource("9_cq5hv")
+stretch_mode = 3
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 volume_db = -10.0

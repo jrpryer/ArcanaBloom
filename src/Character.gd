@@ -7,8 +7,6 @@ const friction = 3200
 var input = Vector2.ZERO
 
 func _physics_process(delta):
-	if DialogManager.is_dialog_active || UiManager.menu_active:
-		return
 	player_movement(delta)
 
 func get_input():
@@ -18,10 +16,16 @@ func get_input():
 	input.x = Input.get_action_strength("right") - Input.get_action_strength("left")
 	input.y = (Input.get_action_strength("down") - Input.get_action_strength("up"))/2
 	return input.normalized()
-	
-		
+
+func reset_input():
+	input = Vector2.ZERO
+
 func player_movement(delta):
 	input = get_input()
+	
+	if DialogManager.is_dialog_active || UiManager.menu_active:
+		reset_input()
+		return
 	
 	if input == Vector2.ZERO:
 		if velocity.length() > (friction * delta):

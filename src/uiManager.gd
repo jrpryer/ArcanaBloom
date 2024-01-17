@@ -7,11 +7,12 @@ extends Node
 #func toggle_ui(ui_name: CanvasLayer, toggle: bool, tag: String):
 func toggle_ui(ui_name: CanvasLayer, toggle: bool):
 	if toggle:
-		ui_name.visible = true 
+		Character.reset_input()
 		menu_active = true
 		ui_name._on_ui_open()
+		ui_name.visible = true 
 			
 	if !toggle:
-		ui_name.visible = false
 		menu_active = false
 		ui_name._on_ui_close()
+		ui_name.visible = false

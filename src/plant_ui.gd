@@ -1,10 +1,11 @@
 extends CanvasLayer
 
-#@onready var fillBar = get_tree().get_first_node_in_group("waterFill")
-#@onready var plant = get_tree().get_first_node_in_group("plant")
-#@onready var particles = get_tree().get_first_node_in_group("particles")
-#@onready var water_button = $MarginContainer/Panel/BoxContainer/VBoxContainer/HBoxContainer/water_button
-#@onready var dock_control = get_tree().get_first_node_in_group("dockControl")
+@onready var plantLeftButton = get_tree().get_first_node_in_group("plantLeftButton")
+@onready var plantUpButton = get_tree().get_first_node_in_group("plantUpButton")
+@onready var plantRightButton = get_tree().get_first_node_in_group("plantRightButton")
+
+@onready var plaque_static = preload("res://ui/textures/big_button_hover.png")
+@onready var plaque_highlighted = preload("res://ui/textures/big_button_hoverHighlight.png")
 @onready var button_sound = preload("res://assets/sounds/Click_Mouse.wav")
 @onready var essence_fill = $MarginContainer/Panel/BoxContainer/VBoxContainer/HBoxContainer2/essenceFill
 @onready var plant_image = $MarginContainer/Panel/plant_window/plant
@@ -26,56 +27,61 @@ var sequencer: int = 0
 func _ready():
 	get_tree().root.add_child.call_deferred(new_audio_player)
 	audio_player.stream = progression_sound
-	new_audio_player.stream = button_sound
-	#self.visible = true #DEBUG
-	#UiManager.menu_active = true #DEBUG
-	
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(_delta):
-	if sequencer == 3:
-		sequencer = 0
-		audio_player.play()
-		match plantedSeed: 
-			"blue1":
-				DockController.essenceAdd(plantedSeed, 53)
-			"red1":
-				DockController.essenceAdd(plantedSeed, 24)
-			"orange1":
-				DockController.essenceAdd(plantedSeed, 9)
-			"white1":
-				DockController.essenceAdd(plantedSeed, 1)
-	
-	if Input.is_action_just_released("left") || Input.is_action_just_released("up") || Input.is_action_just_released("right") || Input.is_action_just_released("down"):
-		pass
+	new_audio_player.stream = button_sound	
 
 func _input(event):
+	if event is InputEventMouseMotion:
+		return
 	match sequencer:
 		0:
-			if event.is_action_pressed("left") && self.visible:
+			if event.is_action_pressed("ui_left") && self.visible:
+				plantLeftButton.texture = plaque_highlighted
 				new_audio_player.play()
 				sequencer += 1
 				update_fill()
 			else:
+				plantLeftButton.texture = plaque_static
 				sequencer = 0
 				update_fill()
 		1: 
-			if event.is_action_pressed("up"):
+			if event.is_action_pressed("ui_up") && self.visible:
+				plantUpButton.texture = plaque_highlighted
 				new_audio_player.play()
 				sequencer += 1
 				update_fill()
 			else:
+				plantUpButton.texture = plaque_static
+				plantLeftButton.texture = plaque_static
 				sequencer = 0
 				update_fill()
 		2: 
-			if event.is_action_pressed("right") && self.visible:
+			if event.is_action_pressed("ui_right") && self.visible:
+				plantRightButton.texture = plaque_highlighted
 				new_audio_player.play()
 				sequencer += 1
 				update_fill()
 			else:
+				plantUpButton.texture = plaque_static
+				plantLeftButton.texture = plaque_static
+				plantRightButton.texture = plaque_static
 				sequencer = 0
 				update_fill()
-	
+		3:
+			sequencer = 0
+			audio_player.play() # Progression/Collection sound
+			match plantedSeed:
+				"blue1":
+					DockController.essenceAdd(plantedSeed, 24)
+				"red1":
+					DockController.essenceAdd(plantedSeed, 13)
+				"orange1":
+					DockController.essenceAdd(plantedSeed, 9)
+				"white1":
+					DockController.essenceAdd(plantedSeed, 1)
+			plantUpButton.texture = plaque_static
+			plantLeftButton.texture = plaque_static
+			plantRightButton.texture = plaque_static
+
 	if event.is_action_pressed("ui_cancel") && self.visible:
 		UiManager.toggle_ui(self, false)
 
@@ -95,12 +101,10 @@ func load_plant(plotSeed: String):
 
 func _on_ui_open():
 	sequencer = 0
-	#essence_fill.value = 0
 
 func _on_ui_close():
 	#new_audio_player.queue_free()
 	pass
 
 func _on_close_button_pressed():
-	#Input.action_press("ui_cancel")
 	UiManager.toggle_ui(self, false)

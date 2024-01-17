@@ -19,10 +19,9 @@ func _process(_delta):
 	pass
 
 func _on_interact():
-	if !spoken:
+	if !DialogManager.door_spoken:
 		DialogManager.start_dialog(lines, speech_sound)
 		await DialogManager.dialog_finished
-		#DialogManager.door_spoken = true
-		spoken = true
+		DialogManager.door_spoken = true
 # Maybe play a buzzing or thump sound here?
 	UiManager.toggle_ui(door_UI, true)

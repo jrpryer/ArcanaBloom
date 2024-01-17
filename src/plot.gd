@@ -24,7 +24,7 @@ var seedGrowthState: int
 
 
 const lines: Array[String] = [
-	"Now grow!"
+	"Now to water it!"
 ]
 
 func _ready():
@@ -63,8 +63,9 @@ func _on_interact():
 		#await new_audio_player.finished #?? Need?
 		#new_audio_player.queue_free() #?? Need?
 	# Give little message
-		if !spoken:
+		if !DialogManager.plot_spoken:
 			DialogManager.start_dialog(lines, speech_sound)
+			DialogManager.plot_spoken = true
 			#await DialogManager.dialog_finished
 
 	if plantedSeed != "empty" && seed_interact:

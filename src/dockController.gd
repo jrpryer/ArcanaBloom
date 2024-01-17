@@ -4,11 +4,11 @@ extends Control
 #@onready var essenceRed = get_tree().get_first_node_in_group("essenceRed")
 #@onready var essenceOrange = get_tree().get_first_node_in_group("essenceOrange")
 #@onready var essenceWhite = get_tree().get_first_node_in_group("essenceWhite")
-@onready var essenceBlue: int
-@onready var essenceRed: int
-@onready var essenceOrange: int
-@onready var essenceWhite: int
-#@onready var book = get_tree().get_first_node_in_group("book_UI")
+@onready var essenceBank_Blue: int
+@onready var essenceBank_Red: int
+@onready var essenceBank_Orange: int
+@onready var essenceBank_White: int
+@onready var essence_bar = get_tree().get_first_node_in_group("essenceBars")
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -22,36 +22,21 @@ func _process(_delta):
 func essenceAdd(essenceColor: String, multiplier: int):
 	var newEssence: int
 	match essenceColor:
-		"blue1":
-			var currentEssence = essenceBlue
+		"blue1", "blue2":
+			var currentEssence = essenceBank_Blue
 			newEssence = currentEssence + (1 * multiplier)
-			essenceBlue = newEssence
-		"blue2":
-			var currentEssence = essenceBlue
+			essenceBank_Blue = newEssence
+		"red1", "red2":
+			var currentEssence = essenceBank_Red
 			newEssence = currentEssence + (1 * multiplier)
-			essenceBlue = newEssence
-		"red1":
-			var currentEssence = essenceRed
+			essenceBank_Red = newEssence
+		"orange1", "orange2":
+			var currentEssence = essenceBank_Orange
 			newEssence = currentEssence + (1 * multiplier)
-			essenceRed = newEssence
-		"red2":
-			var currentEssence = essenceRed
+			essenceBank_Orange = newEssence
+		"white1", "white2":
+			var currentEssence = essenceBank_White
 			newEssence = currentEssence + (1 * multiplier)
-			essenceRed = newEssence
-		"orange1":
-			var currentEssence = essenceOrange
-			newEssence = currentEssence + (1 * multiplier)
-			essenceOrange = newEssence
-		"orange2":
-			var currentEssence = essenceOrange
-			newEssence = currentEssence + (1 * multiplier)
-			essenceOrange = newEssence
-		"white1":
-			var currentEssence = essenceWhite
-			newEssence = currentEssence + (1 * multiplier)
-			essenceWhite = newEssence
-		"white2":
-			var currentEssence = essenceWhite
-			newEssence = currentEssence + (1 * multiplier)
-			essenceWhite = newEssence
+			essenceBank_White = newEssence
+	essence_bar.update_essence(essenceColor)
 	

@@ -1,17 +1,18 @@
-[gd_scene load_steps=13 format=3 uid="uid://dhrxqr1eei2au"]
+[gd_scene load_steps=14 format=3 uid="uid://dhrxqr1eei2au"]
 
 [ext_resource type="Script" path="res://src/door_ui.gd" id="1_0mety"]
 [ext_resource type="StyleBox" uid="uid://dnmicfmqn34qf" path="res://ui/panel3.tres" id="2_2o0uv"]
 [ext_resource type="Theme" uid="uid://dewhnganfla67" path="res://ui/rustic_theme.tres" id="3_1h48d"]
 [ext_resource type="StyleBox" uid="uid://dr1jhqgo7vrtr" path="res://ui/panel1.tres" id="4_2yjh5"]
-[ext_resource type="Texture2D" uid="uid://73y38rkqg37k" path="res://ui/textures/UI_Lower.png" id="5_6hiqr"]
 [ext_resource type="Texture2D" uid="uid://bbb6cj3wn7chm" path="res://assets/essenceBlue.png" id="5_htnms"]
 [ext_resource type="Texture2D" uid="uid://dgv2exfc8ucwh" path="res://ui/textures/Close.png" id="5_l10qj"]
 [ext_resource type="Texture2D" uid="uid://dsa0p5hg8tgp" path="res://ui/textures/doorLock.png" id="5_yexsl"]
 [ext_resource type="Texture2D" uid="uid://kvjbcf0fed7" path="res://ui/textures/button1.png" id="6_efoil"]
 [ext_resource type="Texture2D" uid="uid://w1u62ib488q8" path="res://assets/essenceRed.png" id="7_jqt0q"]
+[ext_resource type="Texture2D" uid="uid://hf8d1sxorujn" path="res://ui/textures/UI_Lower_large.png" id="8_18tmv"]
 [ext_resource type="Texture2D" uid="uid://n6hrdcsbkxel" path="res://assets/essenceOrange.png" id="9_58c5i"]
 [ext_resource type="Texture2D" uid="uid://dyeht2qjx48ln" path="res://assets/essenceWhite.png" id="10_3xb88"]
+[ext_resource type="Texture2D" uid="uid://0gbjjn1g8kdf" path="res://ui/textures/doorLockUnlocked.png" id="13_amk62"]
 
 [node name="door_ui" type="CanvasLayer" groups=["door_UI"]]
 script = ExtResource("1_0mety")
@@ -80,6 +81,17 @@ horizontal_alignment = 2
 [node name="Spacer2" type="Control" parent="MarginContainer/PanelContainer/HBoxContainer/DoorPanel/VBoxContainer1"]
 layout_mode = 2
 size_flags_vertical = 3
+size_flags_stretch_ratio = 0.5
+
+[node name="unlockReq" type="Label" parent="MarginContainer/PanelContainer/HBoxContainer/DoorPanel/VBoxContainer1"]
+texture_filter = 1
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+theme_type_variation = &"HeaderLabel"
+theme_override_font_sizes/font_size = 25
+text = "0 to unlock"
+horizontal_alignment = 2
 
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/PanelContainer/HBoxContainer/DoorPanel/VBoxContainer1"]
 layout_mode = 2
@@ -137,10 +149,14 @@ text = "0"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Button" type="Button" parent="MarginContainer/PanelContainer/HBoxContainer/DoorPanel/VBoxContainer1/HBoxContainer/VBoxContainerLeft"]
+[node name="blue_button" type="Button" parent="MarginContainer/PanelContainer/HBoxContainer/DoorPanel/VBoxContainer1/HBoxContainer/VBoxContainerLeft"]
+texture_filter = 1
 layout_mode = 2
 size_flags_vertical = 3
 size_flags_stretch_ratio = 0.5
+theme_type_variation = &"plaque"
+theme_override_font_sizes/font_size = 25
+action_mode = 0
 text = "Insert Essence"
 
 [node name="Spacer3" type="Control" parent="MarginContainer/PanelContainer/HBoxContainer/DoorPanel/VBoxContainer1/HBoxContainer/VBoxContainerLeft"]
@@ -188,10 +204,13 @@ text = "0"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Button2" type="Button" parent="MarginContainer/PanelContainer/HBoxContainer/DoorPanel/VBoxContainer1/HBoxContainer/VBoxContainerLeft"]
+[node name="red_button" type="Button" parent="MarginContainer/PanelContainer/HBoxContainer/DoorPanel/VBoxContainer1/HBoxContainer/VBoxContainerLeft"]
+texture_filter = 1
 layout_mode = 2
 size_flags_vertical = 3
 size_flags_stretch_ratio = 0.5
+theme_type_variation = &"plaque"
+theme_override_font_sizes/font_size = 25
 text = "Insert Essence"
 
 [node name="Spacer4" type="Control" parent="MarginContainer/PanelContainer/HBoxContainer/DoorPanel/VBoxContainer1/HBoxContainer/VBoxContainerLeft"]
@@ -211,12 +230,14 @@ size_flags_horizontal = 3
 size_flags_stretch_ratio = 2.07
 
 [node name="NinePatchRect" type="NinePatchRect" parent="MarginContainer/PanelContainer/HBoxContainer/DoorPanel/VBoxContainer1/HBoxContainer/MarginContainer"]
+texture_filter = 1
 layout_mode = 2
-texture = ExtResource("5_6hiqr")
-patch_margin_left = 40
-patch_margin_top = 40
-patch_margin_right = 56
-patch_margin_bottom = 56
+texture = ExtResource("8_18tmv")
+region_rect = Rect2(0, 0, 320, 320)
+patch_margin_left = 104
+patch_margin_top = 120
+patch_margin_right = 120
+patch_margin_bottom = 120
 
 [node name="SpacerMargin3" type="Control" parent="MarginContainer/PanelContainer/HBoxContainer/DoorPanel/VBoxContainer1/HBoxContainer"]
 layout_mode = 2
@@ -232,14 +253,6 @@ size_flags_horizontal = 3
 layout_mode = 2
 size_flags_vertical = 3
 size_flags_stretch_ratio = 0.25
-
-[node name="essenceOrange" type="TextureRect" parent="MarginContainer/PanelContainer/HBoxContainer/DoorPanel/VBoxContainer1/HBoxContainer/VBoxContainerRight/HBoxContainerOrange"]
-texture_filter = 1
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-texture = ExtResource("9_58c5i")
-stretch_mode = 5
 
 [node name="textBox1" type="TextureRect" parent="MarginContainer/PanelContainer/HBoxContainer/DoorPanel/VBoxContainer1/HBoxContainer/VBoxContainerRight/HBoxContainerOrange"]
 texture_filter = 1
@@ -268,10 +281,20 @@ text = "0"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Button" type="Button" parent="MarginContainer/PanelContainer/HBoxContainer/DoorPanel/VBoxContainer1/HBoxContainer/VBoxContainerRight"]
+[node name="essenceOrange" type="TextureRect" parent="MarginContainer/PanelContainer/HBoxContainer/DoorPanel/VBoxContainer1/HBoxContainer/VBoxContainerRight/HBoxContainerOrange"]
+texture_filter = 1
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = ExtResource("9_58c5i")
+stretch_mode = 5
+
+[node name="orange_button" type="Button" parent="MarginContainer/PanelContainer/HBoxContainer/DoorPanel/VBoxContainer1/HBoxContainer/VBoxContainerRight"]
 layout_mode = 2
 size_flags_vertical = 3
 size_flags_stretch_ratio = 0.5
+theme_type_variation = &"plaque"
+theme_override_font_sizes/font_size = 25
 text = "Insert Essence"
 
 [node name="Spacer3" type="Control" parent="MarginContainer/PanelContainer/HBoxContainer/DoorPanel/VBoxContainer1/HBoxContainer/VBoxContainerRight"]
@@ -279,27 +302,19 @@ layout_mode = 2
 size_flags_vertical = 3
 size_flags_stretch_ratio = 0.5
 
-[node name="HBoxContainerOrange2" type="HBoxContainer" parent="MarginContainer/PanelContainer/HBoxContainer/DoorPanel/VBoxContainer1/HBoxContainer/VBoxContainerRight"]
+[node name="HBoxContainerWhite" type="HBoxContainer" parent="MarginContainer/PanelContainer/HBoxContainer/DoorPanel/VBoxContainer1/HBoxContainer/VBoxContainerRight"]
 layout_mode = 2
 size_flags_vertical = 3
 size_flags_stretch_ratio = 0.25
 
-[node name="essenceWhite" type="TextureRect" parent="MarginContainer/PanelContainer/HBoxContainer/DoorPanel/VBoxContainer1/HBoxContainer/VBoxContainerRight/HBoxContainerOrange2"]
-texture_filter = 1
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-texture = ExtResource("10_3xb88")
-stretch_mode = 5
-
-[node name="textBox1" type="TextureRect" parent="MarginContainer/PanelContainer/HBoxContainer/DoorPanel/VBoxContainer1/HBoxContainer/VBoxContainerRight/HBoxContainerOrange2"]
+[node name="textBox1" type="TextureRect" parent="MarginContainer/PanelContainer/HBoxContainer/DoorPanel/VBoxContainer1/HBoxContainer/VBoxContainerRight/HBoxContainerWhite"]
 texture_filter = 1
 layout_mode = 2
 size_flags_horizontal = 3
 texture = ExtResource("6_efoil")
 stretch_mode = 5
 
-[node name="countWhite" type="Label" parent="MarginContainer/PanelContainer/HBoxContainer/DoorPanel/VBoxContainer1/HBoxContainer/VBoxContainerRight/HBoxContainerOrange2/textBox1" groups=["essenceWhite"]]
+[node name="countWhite" type="Label" parent="MarginContainer/PanelContainer/HBoxContainer/DoorPanel/VBoxContainer1/HBoxContainer/VBoxContainerRight/HBoxContainerWhite/textBox1" groups=["essenceWhite"]]
 texture_filter = 1
 layout_mode = 1
 anchors_preset = 8
@@ -319,10 +334,20 @@ text = "0"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Button2" type="Button" parent="MarginContainer/PanelContainer/HBoxContainer/DoorPanel/VBoxContainer1/HBoxContainer/VBoxContainerRight"]
+[node name="essenceWhite" type="TextureRect" parent="MarginContainer/PanelContainer/HBoxContainer/DoorPanel/VBoxContainer1/HBoxContainer/VBoxContainerRight/HBoxContainerWhite"]
+texture_filter = 1
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = ExtResource("10_3xb88")
+stretch_mode = 5
+
+[node name="white_button" type="Button" parent="MarginContainer/PanelContainer/HBoxContainer/DoorPanel/VBoxContainer1/HBoxContainer/VBoxContainerRight"]
 layout_mode = 2
 size_flags_vertical = 3
 size_flags_stretch_ratio = 0.5
+theme_type_variation = &"plaque"
+theme_override_font_sizes/font_size = 25
 text = "Insert Essence"
 
 [node name="Spacer5" type="Control" parent="MarginContainer/PanelContainer/HBoxContainer/DoorPanel/VBoxContainer1/HBoxContainer/VBoxContainerRight"]
@@ -349,10 +374,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = 798.0
-offset_top = -486.0
-offset_right = 862.0
-offset_bottom = -422.0
+offset_left = 776.0
+offset_top = -508.0
+offset_right = 903.0
+offset_bottom = -381.0
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(0.7, 0.7)
@@ -361,8 +386,9 @@ size_flags_vertical = 0
 size_flags_stretch_ratio = 3.0
 tooltip_text = "Close"
 texture_normal = ExtResource("5_l10qj")
+stretch_mode = 3
 
-[node name="TextureRect" type="TextureRect" parent="."]
+[node name="doorLock" type="TextureProgressBar" parent="." groups=["lock_fill"]]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -376,8 +402,20 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 3.0
-texture = ExtResource("5_yexsl")
-expand_mode = 1
-stretch_mode = 5
+max_value = 1500.0
+fill_mode = 7
+nine_patch_stretch = true
+texture_under = ExtResource("5_yexsl")
+texture_progress = ExtResource("13_amk62")
 
+[node name="update_timer" type="Timer" parent="."]
+
+[connection signal="button_down" from="MarginContainer/PanelContainer/HBoxContainer/DoorPanel/VBoxContainer1/HBoxContainer/VBoxContainerLeft/blue_button" to="." method="_on_insert_blue_button_down"]
+[connection signal="button_up" from="MarginContainer/PanelContainer/HBoxContainer/DoorPanel/VBoxContainer1/HBoxContainer/VBoxContainerLeft/blue_button" to="." method="_on_insert_blue_button_up"]
+[connection signal="button_down" from="MarginContainer/PanelContainer/HBoxContainer/DoorPanel/VBoxContainer1/HBoxContainer/VBoxContainerLeft/red_button" to="." method="_on_insert_red_button_down"]
+[connection signal="button_up" from="MarginContainer/PanelContainer/HBoxContainer/DoorPanel/VBoxContainer1/HBoxContainer/VBoxContainerLeft/red_button" to="." method="_on_insert_red_button_up"]
+[connection signal="button_down" from="MarginContainer/PanelContainer/HBoxContainer/DoorPanel/VBoxContainer1/HBoxContainer/VBoxContainerRight/orange_button" to="." method="_on_insert_orange_button_down"]
+[connection signal="button_up" from="MarginContainer/PanelContainer/HBoxContainer/DoorPanel/VBoxContainer1/HBoxContainer/VBoxContainerRight/orange_button" to="." method="_on_insert_orange_button_up"]
+[connection signal="button_down" from="MarginContainer/PanelContainer/HBoxContainer/DoorPanel/VBoxContainer1/HBoxContainer/VBoxContainerRight/white_button" to="." method="_on_insert_white_button_down"]
+[connection signal="button_up" from="MarginContainer/PanelContainer/HBoxContainer/DoorPanel/VBoxContainer1/HBoxContainer/VBoxContainerRight/white_button" to="." method="_on_insert_white_button_up"]
 [connection signal="pressed" from="closeButton" to="." method="_on_close_button_pressed"]

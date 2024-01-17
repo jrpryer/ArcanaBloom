@@ -1,6 +1,7 @@
 extends CanvasLayer
 
-@onready var fillBar = $MarginContainer/Panel/BoxContainer/VBoxContainer/HBoxContainer2/waterFill
+@onready var plant_ui = get_tree().get_first_node_in_group("plant_UI")
+@onready var water_fill = $MarginContainer/Panel/BoxContainer/VBoxContainer/HBoxContainer2/waterFill
 @onready var plant_image = $MarginContainer/Panel/plant_window/plant
 @onready var particles = $MarginContainer/Panel/plant_window/VBoxContainer/particles
 @onready var water_button = $MarginContainer/Panel/BoxContainer/VBoxContainer/HBoxContainer/water_button
@@ -11,6 +12,11 @@ extends CanvasLayer
 @onready var currentPlot: Node2D
 @onready var plantedSeed: String
 @onready var seedGrowthState: int
+
+var water_full: bool:
+	set(status):
+		if status:
+			end_watering()
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -62,26 +68,27 @@ func _process(_delta):
 				4: 
 					plant_image.texture = load("res://assets/plots/plotWhite_stage2.png")
 
-	# Set seedGrowthState by water level
-	if fillBar.value >= 33 && fillBar.value < 66:
+
+	if water_fill.value < 100:
+		water_fill.value -= 0.07
+		
+# Set seedGrowthState by water level
+	if water_fill.value >= 33 && water_fill.value < 66:
 		seedGrowthState = 2
 		particles.visible = true
-	if fillBar.value >= 66 && fillBar.value < 100:
+	if water_fill.value >= 66 && water_fill.value < 100:
 		seedGrowthState = 3
-	if fillBar.value == 100:
+	if water_fill.value == 100:
 		seedGrowthState = 4
+		water_full = true
 	else:
 		seedGrowthState = 1
-	
-	if fillBar.value < 100:
-		fillBar.value -= 0.07
-	if fillBar.value == 100:
-		water_button.disabled = true
-		water_button.text = "GROWN!"
 
 func _input(event):
 	if event.is_action_pressed("ui_cancel") && self.visible:
 		UiManager.toggle_ui(self, false)
+	else:
+		return
 	
 func load_plant(plotNode: Node2D, seedSent: String, growthState: int):
 	currentPlot = plotNode
@@ -95,23 +102,33 @@ func load_plant(plotNode: Node2D, seedSent: String, growthState: int):
 		plant_image.texture = load("res://assets/plots/plotOrange_stage1.png")
 	if plantedSeed == "white1":
 		plant_image.texture = load("res://assets/plots/plotWhite_stage1.png")
+
+func end_watering():
+	if seedGrowthState == 4:
+		currentPlot.update_plot(seedGrowthState)
+		water_button.disabled = true
+		water_button.text = "GROWN!"
+		await get_tree().create_timer(1.0).timeout
+		UiManager.toggle_ui(self, false)
+		plant_ui.load_plant(plantedSeed)
+		UiManager.toggle_ui(plant_ui, true)
+		seedGrowthState = 1
+	else:
+		return
 	
 func _on_ui_open():
-	fillBar.value = 0
-	#seedGrowthState = 0
-	particles.visible = false #DEBUG
-	water_button.disabled = false
-	water_button.text = "WATER"
+		particles.visible = false #DEBUG
+		water_button.disabled = false
+		water_button.text = "WATER"
 	
 func _on_ui_close():
-	currentPlot.update_plot(seedGrowthState)
+	water_fill.value = 0
 	
 func _on_water_button_pressed():
-	fillBar.value += 4
+	water_fill.value += 4
 	audio_player.play()
 	if UiManager.dev_debug_mode:
-		fillBar.value = 100
+		water_fill.value = 100
 
 func _on_close_button_pressed():
-	#Input.action_press("ui_cancel")
 	UiManager.toggle_ui(self, false)
