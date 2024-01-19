@@ -1,0 +1,37 @@
+[gd_scene load_steps=5 format=3 uid="uid://20mb1825nsrk"]
+
+[ext_resource type="PackedScene" uid="uid://cay84pt241642" path="res://scenes/player.tscn" id="1_ajumi"]
+[ext_resource type="Texture2D" uid="uid://b68hey45i6t4g" path="res://assets/stoneTile4.png" id="2_taad1"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_xrs7d"]
+texture = ExtResource("2_taad1")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_mph58"]
+tile_shape = 1
+tile_layout = 5
+tile_size = Vector2i(32, 16)
+sources/1 = SubResource("TileSetAtlasSource_xrs7d")
+
+[node name="BaseLevel" type="Node2D"]
+
+[node name="TileMap" type="TileMap" parent="."]
+y_sort_enabled = true
+texture_filter = 1
+tile_set = SubResource("TileSet_mph58")
+rendering_quadrant_size = 32
+format = 2
+layer_0/name = "Base"
+layer_0/y_sort_enabled = true
+layer_1/name = "Layer 1"
+layer_1/y_sort_enabled = true
+layer_1/z_index = 1
+layer_1/tile_data = PackedInt32Array()
+layer_2/name = "Layer 2"
+layer_2/y_sort_enabled = true
+layer_2/z_index = 2
+layer_2/tile_data = PackedInt32Array()
+
+[node name="Player" parent="." instance=ExtResource("1_ajumi")]
+position = Vector2(487, 276)

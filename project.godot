@@ -22,7 +22,9 @@ DialogManager="*res://singletons/DialogManager.gd"
 SeedsBar="*res://src/SeedsBar.gd"
 UiManager="*res://src/UiManager.gd"
 DockController="*res://src/DockController.gd"
+GameManager="*res://src/GameManager.gd"
 Character="*res://src/Character.gd"
+SceneManager="*res://src/SceneManager.gd"
 
 [display]
 

@@ -5,3 +5,7 @@ extends CanvasLayer
 
 func _on_book_button_pressed():
 	UiManager.toggle_ui(book, true)
+
+
+func _on_setting_button_pressed():
+	GameManager.pause_game()
