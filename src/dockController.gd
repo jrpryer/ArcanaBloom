@@ -8,16 +8,10 @@ extends Control
 @onready var essenceBank_Red: int
 @onready var essenceBank_Orange: int
 @onready var essenceBank_White: int
-@onready var essence_bar = get_tree().get_first_node_in_group("essenceBars")
+@onready var essence_bar
 
-# Called when the node enters the scene tree for the first time.
-func _ready():
-#	essence.add_essence.connect(_on_essence_add)
-	pass
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(_delta):
-	pass
+func connect_new_scene():
+	essence_bar = get_tree().get_first_node_in_group("essenceBars")
 
 func essenceAdd(essenceColor: String, multiplier: int):
 	var newEssence: int

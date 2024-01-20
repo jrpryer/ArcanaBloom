@@ -404,6 +404,8 @@ texture_progress = ExtResource("13_amk62")
 
 [node name="update_timer" type="Timer" parent="."]
 
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+
 [connection signal="button_down" from="MarginContainer/PanelContainer/HBoxContainer/DoorPanel/VBoxContainer1/HBoxContainer/VBoxContainerLeft/blue_button" to="." method="_on_insert_blue_button_down"]
 [connection signal="button_up" from="MarginContainer/PanelContainer/HBoxContainer/DoorPanel/VBoxContainer1/HBoxContainer/VBoxContainerLeft/blue_button" to="." method="_on_insert_blue_button_up"]
 [connection signal="button_down" from="MarginContainer/PanelContainer/HBoxContainer/DoorPanel/VBoxContainer1/HBoxContainer/VBoxContainerLeft/red_button" to="." method="_on_insert_red_button_down"]

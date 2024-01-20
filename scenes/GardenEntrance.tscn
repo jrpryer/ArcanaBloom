@@ -1,11 +1,11 @@
-[gd_scene load_steps=20 format=3 uid="uid://dxrt8rb3f1f0"]
+[gd_scene load_steps=21 format=3 uid="uid://dxrt8rb3f1f0"]
 
 [ext_resource type="PackedScene" uid="uid://bce6fsofuenn2" path="res://scenes/wall_left.tscn" id="3_kjw1c"]
 [ext_resource type="PackedScene" uid="uid://cay84pt241642" path="res://scenes/player.tscn" id="3_o86tp"]
 [ext_resource type="PackedScene" uid="uid://dr5e408l6d2dy" path="res://scenes/wall_right.tscn" id="4_odshm"]
 [ext_resource type="PackedScene" uid="uid://dkrckme5qeqv" path="res://scenes/seed.tscn" id="9_flyvp"]
 [ext_resource type="PackedScene" uid="uid://c1shupr7ur2op" path="res://ui/scenes/book_ui.tscn" id="10_5ypdq"]
-[ext_resource type="PackedScene" uid="uid://b7cm47sffldf2" path="res://ui/scenes/Main_HUD.tscn" id="10_lfq4b"]
+[ext_resource type="PackedScene" uid="uid://b7cm47sffldf2" path="res://ui/scenes/HUD.tscn" id="10_lfq4b"]
 [ext_resource type="PackedScene" uid="uid://cc7e6qukt0kay" path="res://scenes/woodenPlot.tscn" id="11_m3oqb"]
 [ext_resource type="PackedScene" uid="uid://ca372k80sbl1d" path="res://ui/scenes/water_ui.tscn" id="11_oiv2c"]
 [ext_resource type="PackedScene" uid="uid://eu106ff6mela" path="res://ui/scenes/plant_ui.tscn" id="12_enqfl"]
@@ -15,6 +15,7 @@
 [ext_resource type="SpriteFrames" uid="uid://bn0blb3t6gc0k" path="res://assets/seeds/seed_red_frames.tres" id="14_koudh"]
 [ext_resource type="SpriteFrames" uid="uid://dlfo4syv65u3l" path="res://assets/seeds/seed_orange_frames.tres" id="15_sk7c8"]
 [ext_resource type="SpriteFrames" uid="uid://w0hpc0k5r7m7" path="res://assets/seeds/seed_white_frames.tres" id="16_hg5r0"]
+[ext_resource type="Script" path="res://src/Camera2D.gd" id="16_k726e"]
 
 [sub_resource type="TileSet" id="TileSet_dkw8y"]
 tile_shape = 1
@@ -53,11 +54,19 @@ tile_set = SubResource("TileSet_54gwx")
 format = 2
 layer_0/y_sort_enabled = true
 layer_0/z_index = 1
-layer_0/tile_data = PackedInt32Array(65545, 0, 65536, 196617, 0, 65536, -65527, 0, 65536, -196599, 0, 65536, -327671, 0, 65536, -458743, 0, 65536, -589815, 0, 65536, -720887, 0, 65536, -786422, 1, 65536, -786420, 1, 65536, -786418, 1, 65536, -786416, 1, 65536, -851951, 0, 65536, -983023, 0, 65536, -1114095, 0, 65536, -1245167, 0, 65536, -1310702, 1, 65536, -1310700, 1, 65536, -1310698, 1, 65536, -1310696, 1, 65536, -1310694, 1, 65536, -1310692, 1, 65536, -1310690, 1, 65536, -1310688, 1, 65536, -1310686, 1, 65536, -1310684, 1, 65536, -1310682, 1, 65536, -1310680, 1, 65536, -1310678, 1, 65536, -1310676, 1, 65536, -1310674, 1, 65536, -1310672, 1, 65536, -1310670, 1, 65536, -1310668, 1, 65536, -1310666, 1, 65536, -1310664, 1, 65536, 327689, 0, 65536, 458761, 0, 65536, 589833, 0, 65536, 655370, 1, 65536, 655372, 1, 65536, 655374, 1, 65536, 655376, 1, 65536, 720913, 0, 65536, 851985, 0, 65536, 983057, 0, 65536, 1114129, 0, 65536, 1245201, 0, 65536, 1376273, 0, 65536, 1507345, 0, 65536)
+layer_0/tile_data = PackedInt32Array(-327671, 0, 65536, -458743, 0, 65536, -589815, 0, 65536, -720887, 0, 65536, -786422, 1, 65536, -786420, 1, 65536, -786418, 1, 65536, -786416, 1, 65536, -851951, 0, 65536, -983023, 0, 65536, -1114095, 0, 65536, -1245167, 0, 65536, -1310702, 1, 65536, -1310700, 1, 65536, -1310698, 1, 65536, -1310696, 1, 65536, -1310694, 1, 65536, -1310692, 1, 65536, -1310690, 1, 65536, -1310688, 1, 65536, -1310686, 1, 65536, -1310684, 1, 65536, -1310682, 1, 65536, -1310680, 1, 65536, -1310678, 1, 65536, -1310676, 1, 65536, -1310674, 1, 65536, -1310672, 1, 65536, -1310670, 1, 65536, -1310668, 1, 65536, -1310666, 1, 65536, -1310664, 1, 65536, 327689, 0, 65536, 458761, 0, 65536, 589833, 0, 65536, 655370, 1, 65536, 655372, 1, 65536, 655374, 1, 65536, 655376, 1, 65536, 720913, 0, 65536, 851985, 0, 65536, 983057, 0, 65536, 1114129, 0, 65536, 1245201, 0, 65536, 1376273, 0, 65536, 1507345, 0, 65536, 196617, 0, 65536, 65545, 0, 65536)
 
 [node name="Player" parent="." instance=ExtResource("3_o86tp")]
 z_index = 10
 y_sort_enabled = true
+
+[node name="Camera2D" type="Camera2D" parent="." node_paths=PackedStringArray("player")]
+position = Vector2(960, 539)
+zoom = Vector2(2, 2)
+script = ExtResource("16_k726e")
+player = NodePath("../Player")
+smoothing_enabled = true
+smoothing_distance = 2
 
 [node name="HUD" parent="." instance=ExtResource("10_lfq4b")]
 

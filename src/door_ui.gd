@@ -13,12 +13,14 @@ extends CanvasLayer
 @onready var white_button = $MarginContainer/PanelContainer/HBoxContainer/DoorPanel/VBoxContainer1/HBoxContainer/VBoxContainerRight/white_button
 
 @onready var essence_bar = get_tree().get_first_node_in_group("essenceBars")
+#@onready var audio_player = $AudioStreamPlayer
+#@onready var progression_sound = preload("res://assets/sounds/essenceSound.wav")
 
-@onready var base_text = " to unlock"
 @onready var lock_fill = $doorLock
-#@onready var essence_needed: int
-@onready var essence_needed = 1500
-@onready var total_essence: int
+var door_node
+var base_text = " to unlock"
+var essence_needed = 1500
+var total_essence: int
 
 var blue_button_down = false
 var red_button_down = false
@@ -33,11 +35,8 @@ var current_countWhite = 0
 var update_speed = 0.01  # Time between updates in seconds
 var increment = 1  # count increment per update
 
-# Called when the node enters the scene tree for the first time.
 func _ready():
-	pass
-	#unlockReq.text = str(essence_needed) + base_text
-	#essence_needed = 1500 #DEBUG
+	door_node = get_tree().get_first_node_in_group("door")
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
@@ -170,6 +169,8 @@ func _on_ui_close():
 	essence_bar.update_essence("red")
 	essence_bar.update_essence("orange")
 	essence_bar.update_essence("white")
+	if essence_needed == 0:
+		door_node.open_door()
 
 func _on_close_button_pressed():
 	#Input.action_press("ui_cancel")

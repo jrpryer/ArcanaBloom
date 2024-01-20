@@ -1,6 +1,5 @@
 extends CanvasLayer
 
-@onready var plant_ui = get_tree().get_first_node_in_group("plant_UI")
 @onready var water_fill = $MarginContainer/Panel/BoxContainer/VBoxContainer/HBoxContainer2/waterFill
 @onready var plant_image = $MarginContainer/Panel/plant_window/plant
 @onready var particles = $MarginContainer/Panel/plant_window/VBoxContainer/particles
@@ -12,6 +11,8 @@ extends CanvasLayer
 @onready var currentPlot: Node2D
 @onready var plantedSeed: String
 @onready var seedGrowthState: int
+
+var plant_ui
 
 var water_full: bool:
 	set(status):
@@ -76,10 +77,16 @@ func _process(_delta):
 	if water_fill.value >= 33 && water_fill.value < 66:
 		seedGrowthState = 2
 		particles.visible = true
+		await get_tree().create_timer(1.5).timeout
+		particles.visible = false
 	if water_fill.value >= 66 && water_fill.value < 100:
 		seedGrowthState = 3
+		particles.visible = true
+		await get_tree().create_timer(1.5).timeout
+		particles.visible = false
 	if water_fill.value == 100:
 		seedGrowthState = 4
+		particles.visible = true
 		water_full = true
 	else:
 		seedGrowthState = 1
@@ -104,15 +111,23 @@ func load_plant(plotNode: Node2D, seedSent: String, growthState: int):
 		plant_image.texture = load("res://assets/plots/plotWhite_stage1.png")
 
 func end_watering():
+	water_full = false
 	if seedGrowthState == 4:
 		currentPlot.update_plot(seedGrowthState)
 		water_button.disabled = true
 		water_button.text = "GROWN!"
 		await get_tree().create_timer(1.0).timeout
-		UiManager.toggle_ui(self, false)
-		plant_ui.load_plant(plantedSeed)
-		UiManager.toggle_ui(plant_ui, true)
-		seedGrowthState = 1
+		if plant_ui != null:
+			plant_ui.load_plant(plantedSeed)
+			UiManager.toggle_ui(plant_ui, true)
+			#seedGrowthState = 1
+		elif plant_ui == null:
+			plant_ui = UiManager.load_ui("plant_ui")
+			plant_ui.load_plant(plantedSeed)
+			UiManager.toggle_ui(plant_ui, true)
+		self.visible = false
+		_on_ui_close()
+		
 	else:
 		return
 	
@@ -123,6 +138,7 @@ func _on_ui_open():
 	
 func _on_ui_close():
 	water_fill.value = 0
+	seedGrowthState = 1
 	
 func _on_water_button_pressed():
 	water_fill.value += 4

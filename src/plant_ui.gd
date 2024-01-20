@@ -1,18 +1,22 @@
 extends CanvasLayer
 
-@onready var plantLeftButton = get_tree().get_first_node_in_group("plantLeftButton")
-@onready var plantUpButton = get_tree().get_first_node_in_group("plantUpButton")
-@onready var plantRightButton = get_tree().get_first_node_in_group("plantRightButton")
-
-@onready var plaque_static = preload("res://ui/textures/big_button_hover.png")
-@onready var plaque_highlighted = preload("res://ui/textures/big_button_hoverHighlight.png")
-@onready var button_sound = preload("res://assets/sounds/Click_Mouse.wav")
+#@onready var plantLeftButton = get_tree().get_first_node_in_group("plantLeftButton")
+#@onready var plantUpButton = get_tree().get_first_node_in_group("plantUpButton")
+#@onready var plantRightButton = get_tree().get_first_node_in_group("plantRightButton")
+@onready var plantLeftButton = $MarginContainer/Panel/BoxContainer/VBoxContainer/HBoxContainer/HBoxContainer/left_button
+@onready var plantUpButton = $MarginContainer/Panel/BoxContainer/VBoxContainer/HBoxContainer/HBoxContainer3/up_button
+@onready var plantRightButton = $MarginContainer/Panel/BoxContainer/VBoxContainer/HBoxContainer/HBoxContainer2/right_button
 @onready var essence_fill = $MarginContainer/Panel/BoxContainer/VBoxContainer/HBoxContainer2/essenceFill
 @onready var plant_image = $MarginContainer/Panel/plant_window/plant
 
-@onready var progression_sound = preload("res://assets/sounds/AC_Correct_Answer_01v2.wav")
+var plaque_static = preload("res://ui/textures/big_button_hover.png")
+var plaque_highlighted = preload("res://ui/textures/big_button_hoverHighlight.png")
+var button_sound = preload("res://assets/sounds/Click_Mouse.wav")
+
+#@onready var progression_sound = preload("res://assets/sounds/AC_Correct_Answer_01v2.wav")
+@onready var essence_sound = preload("res://assets/sounds/AC_Correct_Answer_01v2.wav")
 @onready var audio_player = $AudioStreamPlayer
-@onready var new_audio_player = audio_player.duplicate()
+@onready var button_audio_player = audio_player.duplicate()
 
 #@onready var currentPlot: Node2D
 @onready var plantedSeed: String
@@ -25,9 +29,10 @@ var sequencer: int = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	get_tree().root.add_child.call_deferred(new_audio_player)
-	audio_player.stream = progression_sound
-	new_audio_player.stream = button_sound	
+	get_tree().root.add_child.call_deferred(button_audio_player)
+	audio_player.stream = essence_sound
+	button_audio_player.stream = button_sound	
+	self.visible = false
 
 func _input(event):
 	if event is InputEventMouseMotion:
@@ -36,7 +41,7 @@ func _input(event):
 		0:
 			if event.is_action_pressed("ui_left") && self.visible:
 				plantLeftButton.texture = plaque_highlighted
-				new_audio_player.play()
+				button_audio_player.play()
 				sequencer += 1
 				update_fill()
 			else:
@@ -46,7 +51,7 @@ func _input(event):
 		1: 
 			if event.is_action_pressed("ui_up") && self.visible:
 				plantUpButton.texture = plaque_highlighted
-				new_audio_player.play()
+				button_audio_player.play()
 				sequencer += 1
 				update_fill()
 			else:
@@ -57,7 +62,7 @@ func _input(event):
 		2: 
 			if event.is_action_pressed("ui_right") && self.visible:
 				plantRightButton.texture = plaque_highlighted
-				new_audio_player.play()
+				button_audio_player.play()
 				sequencer += 1
 				update_fill()
 			else:

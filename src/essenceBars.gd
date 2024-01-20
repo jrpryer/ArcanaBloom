@@ -39,9 +39,8 @@ func update_essence(color):
 			target = DockController.essenceBank_Blue
 			target_count += target
 			while current_countBlue < target_count:
-				if increment < (target_count - current_countBlue) / 500:
+				if increment < (target_count - current_countBlue) / 200:
 					increment += (target_count - current_countBlue) / 500
-					print(increment)
 				else:
 					increment = 1
 				current_countBlue += increment

@@ -1,9 +1,8 @@
 extends StaticBody2D
-class_name Plantable
 
-@onready var seedCount = get_tree().get_first_node_in_group("seedsBar").seedCount
-@onready var water_ui = get_tree().get_first_node_in_group("water_UI")
-@onready var plant_ui = get_tree().get_first_node_in_group("plant_UI")
+#@onready var seedCount = get_tree().get_first_node_in_group("seedsBar").seedCount
+#@onready var water_ui_node = get_tree().get_first_node_in_group("water_UI")
+#@onready var plant_ui_node = get_tree().get_first_node_in_group("plant_UI")
 
 @onready var interaction_area: InteractionArea = $InteractionArea
 @onready var plant = $plant_stalk
@@ -15,6 +14,13 @@ class_name Plantable
 @onready var plant_sound = preload("res://assets/sounds/Chest Close 3.wav")
 
 @onready var plantedSeed: String = "empty"
+
+#var water_ui = preload("res://ui/scenes/water_ui.tscn") #DEBUG
+#var plant_ui = preload("res://ui/scenes/plant_ui.tscn") #DEBUG
+
+var seedCount
+var water_ui_screen
+var plant_ui_screen
 
 var seed_interact = false
 var plot_interact = false
@@ -84,13 +90,23 @@ func _on_interact():
 	
 	#if plot_interact == true && seedGrowthState == 1: #?? Need?
 	if plot_interact == true:
-		water_ui.load_plant(self, plantedSeed, seedGrowthState)
-		UiManager.toggle_ui(water_ui, true)
+		if water_ui_screen != null:
+			water_ui_screen.load_plant(self, plantedSeed, seedGrowthState)
+			UiManager.toggle_ui(water_ui_screen, true)
+		elif water_ui_screen == null:
+			water_ui_screen = UiManager.load_ui("water_ui")
+			water_ui_screen.load_plant(self, plantedSeed, seedGrowthState)
+			UiManager.toggle_ui(water_ui_screen, true)
 		
 # Opening the plant_ui
 	if plant_interact == true:
-		plant_ui.load_plant(plantedSeed)
-		UiManager.toggle_ui(plant_ui, true)
+		if plant_ui_screen != null:
+			plant_ui_screen.load_plant(plantedSeed)
+			UiManager.toggle_ui(plant_ui_screen, true)
+		elif plant_ui_screen == null:
+			plant_ui_screen = UiManager.load_ui("plant_ui")
+			plant_ui_screen.load_plant(plantedSeed)
+			UiManager.toggle_ui(plant_ui_screen, true)
 
 func update_plot(newGrowthState: int):
 	seedGrowthState = newGrowthState

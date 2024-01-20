@@ -1,14 +1,16 @@
 extends Control
 
-@onready var seedUI = get_tree().get_first_node_in_group("seedUI")
-@onready var seedIcon = get_tree().get_first_node_in_group("seedIcon")
+#@onready var seedUI = get_tree().get_first_node_in_group("seedUI")
+#@onready var seedIcon = get_tree().get_first_node_in_group("seedIcon")
+@onready var seedUI
+@onready var seedIcon
 @onready var seedCount: int = 0
-
 #var seedBank: Array[InventoryItem_seed]
-var seedBank: Array[String]
+@onready var seedBank: Array[String]
 
-func _ready():
-	pass
+func connect_new_scene():
+	seedUI = get_tree().get_first_node_in_group("seedUI")
+	seedIcon = get_tree().get_first_node_in_group("seedIcon")
 	
 #func register_seed(seedID: InventoryItem_seed):
 func register_seed(seedName: String):

@@ -1,12 +1,18 @@
-[gd_scene load_steps=4 format=3 uid="uid://txsfhmyci18l"]
+[gd_scene load_steps=6 format=3 uid="uid://txsfhmyci18l"]
 
+[ext_resource type="Script" path="res://src/door.gd" id="1_m81mp"]
 [ext_resource type="Texture2D" uid="uid://bio88n73hxmxm" path="res://assets/door1_right.png" id="1_pp7sb"]
 [ext_resource type="PackedScene" uid="uid://dg18h4f07dtwj" path="res://interaction/interact area/interaction_area.tscn" id="2_pjmbs"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_q4n6n"]
 size = Vector2(80, 72)
 
-[node name="Door" type="StaticBody2D"]
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_1xpoy"]
+a = Vector2(28, 15)
+b = Vector2(-28, -13)
+
+[node name="Door" type="StaticBody2D" groups=["door"]]
+script = ExtResource("1_m81mp")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(0, -12)
@@ -22,3 +28,11 @@ position = Vector2(4, -38)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionArea"]
 position = Vector2(-12, 58)
 shape = SubResource("RectangleShape2D_q4n6n")
+
+[node name="door_transition_area" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="door_transition_area"]
+position = Vector2(0, 13)
+shape = SubResource("SegmentShape2D_1xpoy")
+
+[connection signal="body_entered" from="door_transition_area" to="." method="_on_door_transition_area_body_entered"]

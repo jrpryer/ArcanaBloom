@@ -1,8 +1,17 @@
-[gd_scene load_steps=2 format=3 uid="uid://bf6pkp1dsv55c"]
+[gd_scene load_steps=3 format=3 uid="uid://bf6pkp1dsv55c"]
 
 [ext_resource type="PackedScene" uid="uid://20mb1825nsrk" path="res://scenes/Base Level.tscn" id="1_dv5d5"]
+[ext_resource type="PackedScene" uid="uid://b7cm47sffldf2" path="res://ui/scenes/HUD.tscn" id="2_5kqgk"]
 
 [node name="Room1" instance=ExtResource("1_dv5d5")]
 
 [node name="TileMap" parent="." index="0"]
 layer_0/tile_data = PackedInt32Array(196636, 1, 0, 262172, 1, 0, 262173, 1, 0, 327709, 1, 0, 327710, 1, 0, 393246, 1, 0, 458782, 1, 0, 458783, 1, 0, 524319, 1, 0, 524320, 1, 0, 524321, 1, 0, 589857, 1, 0, 589858, 1, 0, 589859, 1, 0, 589860, 1, 0, 589861, 1, 0, 589862, 1, 0, 524326, 1, 0, 524327, 1, 0, 458791, 1, 0, 393255, 1, 0, 327719, 1, 0, 262183, 1, 0, 262182, 1, 0, 196646, 1, 0, 131110, 1, 0, 65574, 1, 0, 65573, 1, 0, 37, 1, 0, 36, 1, 0, -65500, 1, 0, -131036, 1, 0, -131037, 1, 0, -196573, 1, 0, -262109, 1, 0, -262110, 1, 0, -262111, 1, 0, -327647, 1, 0, -65510, 1, 0, -131046, 1, 0, -196582, 1, 0, -393188, 1, 0, -458724, 1, 0, -458723, 1, 0, -524259, 1, 0)
+
+[node name="HUD" parent="." index="3" instance=ExtResource("2_5kqgk")]
+
+[node name="MusicStreamPlayer" type="AudioStreamPlayer" parent="." index="4" groups=["music"]]
+process_mode = 3
+autoplay = true
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." index="5" groups=["sfx"]]

@@ -11,19 +11,20 @@ config_version=5
 [application]
 
 config/name="ArcanaBloom"
-run/main_scene="res://scenes/GardenEntrance.tscn"
+run/main_scene="res://ui/scenes/main_menu_ui.tscn"
 config/features=PackedStringArray("4.2", "GL Compatibility")
 config/icon="res://icon.svg"
 
 [autoload]
 
+GameManager="*res://src/GameManager.gd"
+SettingsManager="*res://src/SettingsManager.gd"
 InteractionManager="*res://interaction/InteractionManager.tscn"
 DialogManager="*res://singletons/DialogManager.gd"
-SeedsBar="*res://src/SeedsBar.gd"
 UiManager="*res://src/UiManager.gd"
-DockController="*res://src/DockController.gd"
-GameManager="*res://src/GameManager.gd"
 Character="*res://src/Character.gd"
+SeedsBar="*res://src/SeedsBar.gd"
+DockController="*res://src/DockController.gd"
 SceneManager="*res://src/SceneManager.gd"
 
 [display]

@@ -1,0 +1,187 @@
+[gd_scene load_steps=6 format=3 uid="uid://dqde6a64dqvkw"]
+
+[ext_resource type="Script" path="res://src/options_menu_ui.gd" id="1_f2hf8"]
+[ext_resource type="StyleBox" uid="uid://dnmicfmqn34qf" path="res://ui/panel3.tres" id="2_obi2j"]
+[ext_resource type="Theme" uid="uid://dewhnganfla67" path="res://ui/rustic_theme.tres" id="3_w2g6r"]
+[ext_resource type="StyleBox" uid="uid://dr1jhqgo7vrtr" path="res://ui/panel1.tres" id="4_wcmop"]
+[ext_resource type="Texture2D" uid="uid://dgv2exfc8ucwh" path="res://ui/textures/Close.png" id="5_51gv3"]
+
+[node name="options_menu_ui" type="CanvasLayer" groups=["book_UI"]]
+process_mode = 3
+layer = 3
+script = ExtResource("1_f2hf8")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+color = Color(0.0196078, 0.00784314, 0, 0.611765)
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -567.0
+offset_top = -466.0
+offset_right = 567.0
+offset_bottom = 414.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="MarginContainer"]
+texture_filter = 1
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 2.0
+theme_override_styles/panel = ExtResource("2_obi2j")
+
+[node name="pausePanel" type="PanelContainer" parent="MarginContainer/PanelContainer"]
+texture_filter = 1
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("3_w2g6r")
+theme_override_styles/panel = ExtResource("4_wcmop")
+
+[node name="VBoxContainer1" type="VBoxContainer" parent="MarginContainer/PanelContainer/pausePanel"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/PanelContainer/pausePanel/VBoxContainer1"]
+texture_filter = 1
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+theme_type_variation = &"HeaderLabel"
+theme_override_font_sizes/font_size = 45
+text = "Options"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Spacer2" type="Control" parent="MarginContainer/PanelContainer/pausePanel/VBoxContainer1"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 3.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/PanelContainer/pausePanel/VBoxContainer1"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 4.77
+alignment = 1
+
+[node name="Spacer" type="Control" parent="MarginContainer/PanelContainer/pausePanel/VBoxContainer1/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.8
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/PanelContainer/pausePanel/VBoxContainer1/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 3.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/PanelContainer/pausePanel/VBoxContainer1/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/PanelContainer/pausePanel/VBoxContainer1/HBoxContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "Screen Mode:"
+
+[node name="Spacer2" type="Control" parent="MarginContainer/PanelContainer/pausePanel/VBoxContainer1/HBoxContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.81
+
+[node name="WindowModeButton" type="OptionButton" parent="MarginContainer/PanelContainer/pausePanel/VBoxContainer1/HBoxContainer/VBoxContainer/HBoxContainer"]
+texture_filter = 1
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 4.0
+theme_type_variation = &"MenuOption"
+alignment = 1
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="MarginContainer/PanelContainer/pausePanel/VBoxContainer1/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label2" type="Label" parent="MarginContainer/PanelContainer/pausePanel/VBoxContainer1/HBoxContainer/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "Resolution:"
+
+[node name="Spacer3" type="Control" parent="MarginContainer/PanelContainer/pausePanel/VBoxContainer1/HBoxContainer/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.22
+
+[node name="ResolutionButton" type="OptionButton" parent="MarginContainer/PanelContainer/pausePanel/VBoxContainer1/HBoxContainer/VBoxContainer/HBoxContainer2"]
+texture_filter = 1
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 4.0
+theme_type_variation = &"MenuOption"
+theme_override_font_sizes/font_size = 55
+alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/PanelContainer/pausePanel/VBoxContainer1/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Spacer3" type="Control" parent="MarginContainer/PanelContainer/pausePanel/VBoxContainer1/HBoxContainer/VBoxContainer/VBoxContainer"]
+texture_filter = 1
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 2.0
+
+[node name="BackButton" type="Button" parent="MarginContainer/PanelContainer/pausePanel/VBoxContainer1/HBoxContainer/VBoxContainer/VBoxContainer"]
+texture_filter = 1
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 4.0
+theme_override_font_sizes/font_size = 55
+text = "Return"
+
+[node name="Spacer3" type="Control" parent="MarginContainer/PanelContainer/pausePanel/VBoxContainer1/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.8
+
+[node name="Spacer1" type="Control" parent="MarginContainer/PanelContainer/pausePanel/VBoxContainer1"]
+texture_filter = 1
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 2.0
+
+[node name="closeButton" type="TextureButton" parent="."]
+texture_filter = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 520.0
+offset_top = -508.0
+offset_right = 647.0
+offset_bottom = -381.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.7, 0.7)
+size_flags_horizontal = 8
+size_flags_vertical = 0
+size_flags_stretch_ratio = 3.0
+tooltip_text = "Close"
+texture_normal = ExtResource("5_51gv3")
+stretch_mode = 3
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+
+[connection signal="item_selected" from="MarginContainer/PanelContainer/pausePanel/VBoxContainer1/HBoxContainer/VBoxContainer/HBoxContainer/WindowModeButton" to="." method="_on_window_mode_button_item_selected"]
+[connection signal="item_selected" from="MarginContainer/PanelContainer/pausePanel/VBoxContainer1/HBoxContainer/VBoxContainer/HBoxContainer2/ResolutionButton" to="." method="_on_resolution_button_item_selected"]
+[connection signal="pressed" from="MarginContainer/PanelContainer/pausePanel/VBoxContainer1/HBoxContainer/VBoxContainer/VBoxContainer/BackButton" to="." method="_on_back_button_pressed"]
+[connection signal="pressed" from="closeButton" to="." method="_on_close_button_pressed"]

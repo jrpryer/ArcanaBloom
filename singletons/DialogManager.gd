@@ -1,26 +1,24 @@
 extends Node
 
-#@onready var text_popup_scene = preload("res://ui/text_popup.tscn")
 #@onready var text_popup_scene = preload("res://ui/textFeed.tscn")
-@onready var textFeed_scene = get_tree().get_first_node_in_group("textFeed")
-@onready var textFeed = get_tree().get_first_node_in_group("textFeedDock")
-@onready var audio_player = get_tree().get_first_node_in_group("sfx")
+#@onready var textFeed = get_tree().get_first_node_in_group("textFeed")
+#@onready var textFeedDock = get_tree().get_first_node_in_group("textFeedDock")
+#@onready var audio_player = get_tree().get_first_node_in_group("sfx")
 @onready var advance_sound = preload("res://assets/sounds/Click_Mouse.wav")
+
+@onready var textFeed
+@onready var textFeedDock
+@onready var audio_player
 
 var seed_spoken = false
 var plot_spoken = false
 var door_spoken = false
-
-func _ready():
-	textFeed_scene.finished_displaying.connect(_on_text_popup_finished_displaying)
-	audio_player.stream = advance_sound
 
 var dialog_lines: Array[String] = []
 var current_line_index = 0
 
 var text_popup
 var text_popup_position: Vector2
-#var tail_pos: float
 
 var sfx: AudioStream # Still need to add_child a new_audio_player and play() 
 
@@ -29,20 +27,33 @@ var can_advance_line = false
 
 signal dialog_finished()
 
+#func _ready():
+	#if textFeed != null:
+		#textFeed.finished_displaying.connect(_on_text_popup_finished_displaying)
+		#audio_player.stream = advance_sound
+
+func connect_new_scene():
+	textFeed = get_tree().get_first_node_in_group("textFeed")
+	textFeedDock = get_tree().get_first_node_in_group("textFeedDock")
+	audio_player = get_tree().get_first_node_in_group("sfx")
+	textFeed.finished_displaying.connect(_on_text_popup_finished_displaying)
+	audio_player.stream = advance_sound
+
+
 func start_dialog(lines: Array[String], speech_sfx: AudioStream):
 	if is_dialog_active:
 		return
 	
 	dialog_lines = lines
 #	text_popup_position = position
-	text_popup_position = textFeed.global_position
+	text_popup_position = textFeedDock.global_position
 	sfx = speech_sfx
 	_show_popup()
 	
 	is_dialog_active = true
 
 func _show_popup():
-	text_popup = textFeed_scene
+	text_popup = textFeed
 	text_popup.global_position = text_popup_position
 	text_popup.display_text(dialog_lines[current_line_index], sfx)
 	
